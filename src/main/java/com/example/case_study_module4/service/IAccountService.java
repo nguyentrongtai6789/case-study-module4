@@ -12,4 +12,5 @@ public interface IAccountService{
     boolean save(Account account);
     void delete(Long id);
     AccountDTO toDTO(Account account);
+    Account findOneAccountById(Long id);
 }

@@ -60,6 +60,11 @@ public class AccountService implements IAccountService, UserDetailsService {
     }
 
     @Override
+    public Account findOneAccountById(Long id) {
+        return accountRepository.findById(id).get();
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
         Account account = accountRepository.findByName(name);
         if (account != null) {
