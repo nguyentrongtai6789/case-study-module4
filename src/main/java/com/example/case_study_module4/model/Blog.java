@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.parameters.P;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -28,6 +29,8 @@ public class Blog {
     @NotEmpty
     @Column(nullable = false, columnDefinition = "varchar(255) default 'abc.jpg' ")
     private String url_img;
+    @Transient
+    private MultipartFile multipartFile;
     @NotEmpty
     @Column(nullable = false)
     private LocalDate date;
