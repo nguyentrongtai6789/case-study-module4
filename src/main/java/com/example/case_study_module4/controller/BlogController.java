@@ -20,7 +20,7 @@ public class BlogController {
     }
     @PostMapping("/update")
     public ResponseEntity update(@RequestBody Blog new_Blog){
-
+        return null;
     }
 
 
