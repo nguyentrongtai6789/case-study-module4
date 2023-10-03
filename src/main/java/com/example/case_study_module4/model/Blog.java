@@ -21,7 +21,7 @@ public class Blog {
     private Long id;
     @NotEmpty
     @Column(nullable = false)
-    private String tittle;
+    private String title;
     @NotEmpty
     @Column(nullable = false)
     private String content;
