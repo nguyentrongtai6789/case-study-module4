@@ -64,14 +64,14 @@ public class AccountController {
         List<AccountDTO> accountDTOSs = accountService.findAll();
         AccountDTO accountDTO = accountService.toDTO(account);
         for (AccountDTO account1 : accountDTOSs) {
-            if (account1.getEmail().equals(accountDTO.getEmail())) {
-                return new ResponseEntity<>("Email đã tồn tại!", HttpStatus.BAD_REQUEST);
-            }
             if (account1.getName().equals(accountDTO.getName())) {
                 return new ResponseEntity<>("Tên đã tồn tại!", HttpStatus.BAD_REQUEST);
             }
-            if (account1.getPhone().equals(accountDTO.getPassword())) {
+            if (account1.getPhone().equals(accountDTO.getPhone())) {
                 return new ResponseEntity<>("Số điện thoại đã tồn tại!", HttpStatus.BAD_REQUEST);
+            }
+            if (account1.getEmail().equals(accountDTO.getEmail())) {
+                return new ResponseEntity<>("Email đã tồn tại!", HttpStatus.BAD_REQUEST);
             }
         }
         accountService.save(account);
