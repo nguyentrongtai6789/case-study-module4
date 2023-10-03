@@ -20,7 +20,7 @@ import java.util.Objects;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api/controller")
+@RequestMapping("/api/blog")
 public class BlogController {
     @Autowired
     IBlogService iBlogService;
@@ -37,10 +37,10 @@ public class BlogController {
         return new ResponseEntity<>(iBlogService.findById(id), HttpStatus.OK);
     }
     @PostMapping("/update/{id_account}/{id_category}")
-    public ResponseEntity<?> update(@RequestBody Blog new_Blog,
-                                 @PathVariable("id_account") Long id_account,
-                                 @PathVariable("id_category") Long id_category,
-                                 @RequestPart(value = "file", required = false) MultipartFile file){
+    public ResponseEntity<?> update(@RequestPart("blog") Blog new_Blog,
+                                    @PathVariable("id_account") Long id_account,
+                                    @PathVariable("id_category") Long id_category,
+                                    @RequestPart(value = "file", required = false) MultipartFile file){
         getImagePath(new_Blog, file);
         Account account = iAccountService.findOneAccountById(id_account);
         Category category = iCategoryService.findById(id_category);
@@ -63,6 +63,4 @@ public class BlogController {
            blog.setUrl_img(name);
         }
     }
-
-
 }
