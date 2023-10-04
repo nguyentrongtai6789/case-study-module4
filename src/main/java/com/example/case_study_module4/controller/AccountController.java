@@ -38,7 +38,7 @@ public class AccountController {
     @Autowired
     private RoleService roleService;
 
-    @GetMapping("/accounts")
+    @GetMapping("/findAllAccounts")
     public ResponseEntity<List<AccountDTO>> getAllAccount() {
         return new ResponseEntity<>(accountService.findAll(), HttpStatus.OK);
     }
@@ -78,7 +78,20 @@ public class AccountController {
         accountService.save(account);
         return new ResponseEntity<>("Đăng kí thành công!", HttpStatus.OK);
     }
-
+    @PostMapping("/saveNewRole/{id}")
+    public ResponseEntity<String> saveNewRole(@PathVariable Long id) {
+        AccountDTO accountDTO = accountService.findById(id);
+        if (accountDTO != null) {
+            Account account = accountService.findByAccountName(accountDTO.getName());
+            Set<Role> roles = new HashSet<>();
+            roles.add(roleService.findById(1L));
+            roles.add(roleService.findById(2L));
+            account.setRoles(roles);
+            accountService.save(account);
+            return new ResponseEntity<>("Thêm quyền admin thành công!", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("xxx", HttpStatus.BAD_REQUEST);
+    }
     @PostMapping("/passwordRetrieval")
     public ResponseEntity<String> passwordRetrieval(@RequestBody Account account) {
         Account account1 = accountService.findByAccountName(account.getName());
@@ -92,5 +105,15 @@ public class AccountController {
             }
         }
         return new ResponseEntity<>("Thông tin không đúng!", HttpStatus.BAD_REQUEST);
+    }
+
+    @DeleteMapping("/deleteAccount/{id}")
+    public ResponseEntity<String> deleteAccount(@PathVariable Long id) {
+        AccountDTO account = accountService.findById(id);
+        if (account != null) {
+            accountService.delete(id);
+            return new ResponseEntity<>("Xoá thành công!", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("xxx", HttpStatus.BAD_REQUEST);
     }
 }

@@ -15,7 +15,7 @@ function login() {
         success: function (data) {
             localStorage.setItem("token", data.token); // lưu token
             localStorage.setItem("account-name", data.username) // lưu tên nguời dùng
-            localStorage.setItem("roles", JSON.stringify(data.authorities)) // lưu roles (array)
+            localStorage.setItem("roles", JSON.stringify(data.authorities)) // lưu roles của account (array)
             // check role:
             let roles = JSON.parse(localStorage.getItem("roles"))
             let check = false;
@@ -27,7 +27,7 @@ function login() {
             }
             if (check) {
                 // nếu là admin chuyển về trang của admin
-                window.location.href = "inner-page.html"
+                window.location.href = "admin-page.html"
             } else {
             // nếu là trang user chuyển về trang user
                 window.location.href = "index.html"

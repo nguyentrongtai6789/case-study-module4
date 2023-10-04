@@ -8,15 +8,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
+
 @Service
 public class RoleService implements IRoleService {
     @Autowired
     private IRoleRepository roleRepository;
     @Override
     public List<Role> findALl() {
-        return null;
+        return roleRepository.findAll();
     }
-
     @Override
     public Page<Role> findAll() {
         return null;
