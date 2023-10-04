@@ -36,11 +36,7 @@ public class BlogController {
     public ResponseEntity<Blog> findOne(@PathVariable("id_blog") Long id){
         return new ResponseEntity<>(iBlogService.findById(id), HttpStatus.OK);
     }
-<<<<<<< HEAD
-    @PostMapping("/update")
-    public ResponseEntity update(@RequestBody Blog new_Blog){
-        return null;
-=======
+
     @PostMapping("/update/{id_account}/{id_category}")
     public ResponseEntity<?> update(@RequestPart("blog") Blog new_Blog,
                                     @PathVariable("id_account") Long id_account,
@@ -67,6 +63,5 @@ public class BlogController {
             }
            blog.setUrl_img(name);
         }
->>>>>>> update_blog
     }
 }
