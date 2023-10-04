@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 
 @Entity
@@ -18,10 +19,10 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty
+    @NotNull
     @Column(nullable = false)
     private String content;
-    @NotEmpty
+    @NotNull
     @Column(nullable = false)
     private LocalTime time;
     @ManyToOne

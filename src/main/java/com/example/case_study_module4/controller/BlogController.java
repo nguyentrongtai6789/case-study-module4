@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -32,8 +33,17 @@ public class BlogController {
     @Value("${upload.path}")
     private String upload;
 
-    @GetMapping("/update/{id}")
-    public ResponseEntity<Blog> findOne(@PathVariable("id_blog") Long id){
+    @GetMapping
+    public ResponseEntity<List<Blog>> disPlayBlog(){
+        return new ResponseEntity<>(iBlogService.findALl(), HttpStatus.OK);
+    }
+    @GetMapping("/display/{id_account}")
+    public ResponseEntity<List<Blog>> disPlayListBlogByAcount(@RequestPart("id_account") Long id_account){
+        return new ResponseEntity<>(iBlogService.listBlogByAccount(id_account), HttpStatus.OK);
+    }
+
+    @GetMapping("/update/{id-blog}")
+    public ResponseEntity<Blog> findOne(@PathVariable("id-blog") Long id){
         return new ResponseEntity<>(iBlogService.findById(id), HttpStatus.OK);
     }
 
@@ -47,6 +57,7 @@ public class BlogController {
         Category category = iCategoryService.findById(id_category);
         new_Blog.setCategory(category);
         new_Blog.setAccount(account);
+        iBlogService.save(new_Blog);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     private void getImagePath(Blog blog, MultipartFile file) {

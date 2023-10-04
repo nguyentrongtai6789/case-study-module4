@@ -14,13 +14,13 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty
+    @NotNull
     @Column(nullable = false)
     private String name;
-    @NotEmpty
+    @NotNull
     @Column(nullable = false)
     private String password;
-    @NotEmpty
+    @NotNull
     @Column(nullable = false)
     private String phone;
     @NotEmpty

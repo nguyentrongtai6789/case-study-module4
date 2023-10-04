@@ -1,6 +1,7 @@
 package com.example.case_study_module4.service.impl;
 
 import com.example.case_study_module4.model.Blog;
+import com.example.case_study_module4.model.account.Account;
 import com.example.case_study_module4.repository.IBlogRepository;
 import com.example.case_study_module4.service.IBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ public class BlogService implements IBlogService {
     private IBlogRepository blogRepository;
     @Override
     public List<Blog> findALl() {
-        return null;
+        return blogRepository.findAll();
     }
 
     @Override
@@ -24,7 +25,7 @@ public class BlogService implements IBlogService {
 
     @Override
     public void save(Blog blog) {
-
+        blogRepository.save(blog);
     }
 
     @Override
@@ -34,6 +35,11 @@ public class BlogService implements IBlogService {
 
     @Override
     public void deleteById(Long id) {
+        blogRepository.deleteById(id);
+    }
 
+    @Override
+    public List<Blog> listBlogByAccount(Long id_account) {
+        return blogRepository.disPlayListBlogByIdAccount(id_account);
     }
 }
