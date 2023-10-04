@@ -56,7 +56,7 @@ public class AccountService implements IAccountService, UserDetailsService {
 
     @Override
     public AccountDTO toDTO(Account account) {
-        return new AccountDTO(account.getId(), account.getName(), account.getPassword(), account.getPhone(), account.getEmail(), account.getRoles());
+        return new AccountDTO(account.getId(), account.getName(), account.getPhone(), account.getEmail(), account.getRoles());
     }
 
     @Override

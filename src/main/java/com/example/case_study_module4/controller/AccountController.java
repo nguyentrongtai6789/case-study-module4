@@ -19,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.*;
 
@@ -78,4 +79,18 @@ public class AccountController {
         return new ResponseEntity<>("Đăng kí thành công!", HttpStatus.OK);
     }
 
+    @PostMapping("/passwordRetrieval")
+    public ResponseEntity<String> passwordRetrieval(@RequestBody Account account) {
+        Account account1 = accountService.findByAccountName(account.getName());
+        if (account1 != null) {
+            if (account1.getName().equals(account.getName())
+                    && account1.getPhone().equals(account.getPhone())
+                    && account1.getEmail().equals(account.getEmail())) {
+                account1.setPassword(passwordEncoder.encode(account.getPassword()));
+                accountService.save(account1);
+                return new ResponseEntity<>("Bạn đã lấy lại mật khẩu thành công!", HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>("Thông tin không đúng!", HttpStatus.BAD_REQUEST);
+    }
 }

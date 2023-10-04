@@ -27,10 +27,10 @@ function login() {
             }
             if (check) {
                 // nếu là admin chuyển về trang của admin
-                window.location.href = "index.html"
+                window.location.href = "inner-page.html"
             } else {
             // nếu là trang user chuyển về trang user
-                window.location.href = "inner-page.html"
+                window.location.href = "index.html"
             }
         },
         error: function () {

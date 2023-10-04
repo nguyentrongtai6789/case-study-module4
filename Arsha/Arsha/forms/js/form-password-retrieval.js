@@ -16,8 +16,7 @@ function checkPassword1() {
         document.getElementById("password-1-valid").innerHTML = "";
         return true;
     } else {
-        document.getElementById("password-1-valid").innerHTML =
-            "Mật khẩu phải chứa ít nhất 1 chữ " +
+        document.getElementById("password-1-valid").innerHTML = "Mật khẩu phải chứa ít nhất 1 chữ " +
             "cái viết thường, ít nhất 1 chữ cái viết hoa, ít nhất 1 số, có độ dài tối thiểu 8 kí tự và không có kí tự đặc biệt!"
         return false;
     }
@@ -59,20 +58,20 @@ function checkEmail() {
     }
 }
 
-function checkValidate() {
+function checkValidate2() {
     document.getElementById("name-valid").innerHTML = ""
     let name = $("#name").val()
     let password1 = $("#password-1").val()
     let password2 = $("#password-2").val()
     let phone = $("#phone").val()
     let email = $("#email").val()
-    let account_register = {
+    let account_retrieval_password = {
         name: name,
         password: password1,
         phone: phone,
         email: email,
     }
-    localStorage.setItem("account-register", JSON.stringify(account_register))
+    localStorage.setItem("account-retrieval-password", JSON.stringify(account_retrieval_password))
     let check = true;
     if (name == "") {
         document.getElementById("name-valid").innerHTML = "Tên không được trống!"
@@ -95,24 +94,24 @@ function checkValidate() {
         check = false;
     }
     if (check && checkEmail() && checkPhone() && checkPassword2()) {
-        addNewAccount();
+        passwordRetrieval();
     } else {
         alert("Hãy kiểm tra lại thông tin đăng kí của bạn!")
     }
     event.preventDefault();
 }
 
-function addNewAccount() {
-    let account = JSON.parse(localStorage.getItem("account-register"));
+function passwordRetrieval() {
+    let account = JSON.parse(localStorage.getItem("account-retrieval-password"));
     $.ajax({
         headers: {
             "Content-Type": "application/json"
         }, // phải có cái headers này chú ý!!!!
-        url: "http://localhost:8080/api/saveAccount",
+        url: "http://localhost:8080/api/passwordRetrieval",
         type: "POST",
         data: JSON.stringify(account),
         success: function () {
-            alert("Đăng kí thành công!")
+            alert("Lấy lại mật khẩu thành công!")
             window.location.href = "form-login.html"
         },
         error: function (xhr) {

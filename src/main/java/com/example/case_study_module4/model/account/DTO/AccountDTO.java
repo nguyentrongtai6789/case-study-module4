@@ -7,7 +7,7 @@ import java.util.Set;
 public class AccountDTO {
     private Long id;
     private String name;
-    private String password;
+
     private String phone;
     private String email;
     private Set<Role> roles;
@@ -16,10 +16,9 @@ public class AccountDTO {
     }
 
 
-    public AccountDTO(Long id, String name, String password, String phone, String email, Set<Role> roles) {
+    public AccountDTO(Long id, String name, String phone, String email, Set<Role> roles) {
         this.id = id;
         this.name = name;
-        this.password = password;
         this.phone = phone;
         this.email = email;
         this.roles = roles;
@@ -49,13 +48,6 @@ public class AccountDTO {
         this.roles = roles;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getPhone() {
         return phone;
