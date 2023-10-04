@@ -22,10 +22,10 @@ public class Blog {
     private Long id;
     @NotEmpty
     @Column(nullable = false)
-    private String title;
+    private String title; // tiêu đề
     @NotEmpty
     @Column(nullable = false)
-    private String content;
+    private String content; // nội dung
     @NotEmpty
     @Column(nullable = false, columnDefinition = "varchar(255) default 'abc.jpg' ")
     private String url_img;
