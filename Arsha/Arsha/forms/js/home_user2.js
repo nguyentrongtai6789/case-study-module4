@@ -1,3 +1,25 @@
+
+function showListCategory() {
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/api/category",
+        success: function (data) {
+            console.log("category = " + data)
+            let content = ""
+            if (data.length !== null) {
+                for (let i = 0; i < data,length; i++) {
+                    content += "<li value=\"" + data[i].id +"\" onclick=\"\">" + data[i].name +"</li>"
+                }
+            }
+            document.getElementById("L-category").innerHTML = content;
+        }
+    })
+
+}
+function searchByCategory(id_category) {
+
+}
+
 function disPlayBlogs() {
     $.ajax({
         type: "Get",
