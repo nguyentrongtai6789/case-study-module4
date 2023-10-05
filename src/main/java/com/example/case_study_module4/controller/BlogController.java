@@ -38,8 +38,12 @@ public class BlogController {
         return new ResponseEntity<>(iBlogService.findALl(), HttpStatus.OK);
     }
     @GetMapping("/display/{id_account}")
-    public ResponseEntity<List<Blog>> disPlayListBlogByAcount(@RequestPart("id_account") Long id_account){
+    public ResponseEntity<List<Blog>> disPlayListBlogByAcount(@PathVariable("id_account") Long id_account){
         return new ResponseEntity<>(iBlogService.listBlogByAccount(id_account), HttpStatus.OK);
+    }
+    @GetMapping("/displayoneblog/{id_blog}")
+    public ResponseEntity<Blog> disPlayOneBlog(@PathVariable("id_blog") Long id_blog){
+        return new ResponseEntity<>(iBlogService.findById(id_blog), HttpStatus.OK);
     }
 
     @GetMapping("/update/{id-blog}")
@@ -58,6 +62,11 @@ public class BlogController {
         new_Blog.setCategory(category);
         new_Blog.setAccount(account);
         iBlogService.save(new_Blog);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @GetMapping("/delete/{id_blog}")
+    public ResponseEntity<?> delete(@PathVariable("id_blog") Long id_blog){
+        iBlogService.deleteById(id_blog);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     private void getImagePath(Blog blog, MultipartFile file) {

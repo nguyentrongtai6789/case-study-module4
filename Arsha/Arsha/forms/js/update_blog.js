@@ -79,6 +79,7 @@ function updateNewBlog() {
         data: formData,
         success: function (){
             alert("Sửa thành công");
+            window.location.href = "../html/home-user2.html";
         }
     })
 
