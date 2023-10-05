@@ -1,6 +1,7 @@
 package com.example.case_study_module4.controller;
 
 import com.example.case_study_module4.model.Blog;
+import com.example.case_study_module4.model.Comment;
 import com.example.case_study_module4.service.IBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -63,4 +64,5 @@ public class BlogControllerTai {
         List<Blog> blogs = blogService.listBlogByAccount(id);
         return new ResponseEntity<>(blogs, HttpStatus.OK);
     }
+
 }

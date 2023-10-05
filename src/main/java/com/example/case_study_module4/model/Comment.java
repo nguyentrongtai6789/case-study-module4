@@ -22,7 +22,6 @@ public class Comment {
     @NotNull
     @Column(nullable = false)
     private String content;
-    @NotNull
     @Column(nullable = false)
     private LocalTime time;
     @ManyToOne
