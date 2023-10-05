@@ -15,6 +15,7 @@ function login() {
         success: function (data) {
             localStorage.setItem("token", data.token); // lưu token
             localStorage.setItem("account-name", data.username) // lưu tên nguời dùng
+            localStorage.setItem("id-account", data.id)
             localStorage.setItem("roles", JSON.stringify(data.authorities)) // lưu roles của account (array)
             // check role:
             let roles = JSON.parse(localStorage.getItem("roles"))

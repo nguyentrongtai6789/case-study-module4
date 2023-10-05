@@ -14,25 +14,23 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "blog")
+@Data
 @Getter
 @Setter
-@Data
+
 public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty
+    @NotNull
     @Column(nullable = false)
     private String title; // tiêu đề
     @NotNull
     @Column(nullable = false)
     private String content; // nội dung
-    @NotNull
-    @Column(nullable = false, columnDefinition = "varchar(255) default 'abc.jpg' ")
     private String url_img;
     @Transient
     private MultipartFile multipartFile;
-    @NotNull
     @Column(nullable = false)
     private LocalDate date;
     @ManyToOne

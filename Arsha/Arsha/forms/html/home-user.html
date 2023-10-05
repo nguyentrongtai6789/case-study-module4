@@ -111,7 +111,7 @@
 </section><!-- End Hero -->
 
 <main id="main">
-
+    <!-- create blog -->
     <section id="contact" class="contact">
         <div class="container" data-aos="fade-up" style="text-align: center; align-items: center">
 
@@ -121,11 +121,12 @@
 
             <div class="row" style="display: flex; justify-content: center; align-items: center">
                 <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-                    <form action="forms/contact.php" method="post" role="form" class="php-email-form" style="text-align: center;">
+                    <form method="post" class="php-email-form" style="text-align: center;"
+                          enctype="multipart/form-data" id="form-create-blog">
                         <div class="row">
                             <div class="form-group" style="text-align: center;">
                                 <span>Tiêu đề của bài viết:</span>
-                                <input type="text" class="form-control" id="title-create">
+                                <input type="text" class="form-control" id="title-create" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -133,20 +134,16 @@
                             <span id="category-create"></span>
                         </div>
                         <div class="form-group">
-                            <span>Chọn ảnh bài viết:</span>
+                            <span>Chọn ảnh:</span><br>
                             <input type="file" id="image-create">
                         </div>
                         <div class="form-group">
                             <span>Nhập nội dung của bài viết:</span>
-                            <textarea class="form-control" name="message" rows="10" required></textarea>
-                        </div>
-                        <div class="my-3">
-                            <div class="loading">Loading</div>
-                            <div class="error-message"></div>
-                            <div class="sent-message">Your message has been sent. Thank you!</div>
+                            <textarea class="form-control" name="message" rows="10" id="content-create"
+                                      required></textarea>
                         </div>
                         <div class="text-center">
-                            <button type="submit">Send Message</button>
+                            <button type="submit" onclick="createNewBlog()">Send Message</button>
                         </div>
                     </form>
                 </div>
@@ -154,7 +151,8 @@
             </div>
 
         </div>
-    </section><!-- End Contact Section -->
+    </section>
+    <!-- End create blog -->
     <!-- ======= Thông tin tài khoản ======= -->
     <section id="about" class="about">
         <div class="container" data-aos="fade-up">
@@ -163,22 +161,27 @@
             </div>
             <div class="row content">
                 <div class="col-lg-6">
-                    <span><i class="ri-check-double-line" style="color: #0a53be"></i>Tên tài khoản: <span id="name-account"></span></span><br>
-                    <span><i class="ri-check-double-line" style="color: #0a53be"></i>Số điện thoại: <span id="phone-account"></span></span><br>
-                    <span><i class="ri-check-double-line" style="color: #0a53be"></i>Email: <span id="email-account"></span></span>
+                    <span><i class="ri-check-double-line" style="color: #0a53be"></i>Tên tài khoản: <span
+                            id="name-account"></span></span><br>
+                    <span><i class="ri-check-double-line" style="color: #0a53be"></i>Số điện thoại: <span
+                            id="phone-account"></span></span><br>
+                    <span><i class="ri-check-double-line" style="color: #0a53be"></i>Email: <span
+                            id="email-account"></span></span>
                 </div>
                 <div class="col-lg-6 pt-4 pt-lg-0" style="text-align: center">
-                    <a href="form-change-password.html" target="_blank" class="btn-learn-more" style="width: 200px">Đổi mật khẩu</a><br>
+                    <a href="form-change-password.html" target="_blank" class="btn-learn-more" style="width: 200px">Đổi
+                        mật khẩu</a><br>
                     <span id="information-to-change-password"></span>
                     <a href="form-login.html" class="btn-learn-more" style="width: 200px">Đăng xuất</a>
                 </div>
             </div>
 
         </div>
-    </section><!-- End About Us Section -->
+    </section>
+    <!-- End thông tin tài khoản -->
 
 
-    <!-- ======= Team Section ======= -->
+    <!-- ======= Hiển thị bài viết của bạn ======= -->
     <section id="team" class="team section-bg">
         <div class="container" data-aos="fade-up">
 
@@ -186,76 +189,7 @@
                 <h2>Bài viết của bạn</h2>
             </div>
 
-            <div class="row">
-
-                <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="member d-flex align-items-start">
-                        <div class="pic"><img src="../../assets/img/team/team-1.jpg" class="img-fluid" alt=""></div>
-                        <div class="member-info">
-                            <h4>Walter White</h4>
-                            <span>Chief Executive Officer</span>
-                            <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
-                            <div class="social">
-                                <a href=""><i class="ri-twitter-fill"></i></a>
-                                <a href=""><i class="ri-facebook-fill"></i></a>
-                                <a href=""><i class="ri-instagram-fill"></i></a>
-                                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="member d-flex align-items-start">
-                        <div class="pic"><img src="../../assets/img/team/team-2.jpg" class="img-fluid" alt=""></div>
-                        <div class="member-info">
-                            <h4>Sarah Jhonson</h4>
-                            <span>Product Manager</span>
-                            <p>Aut maiores voluptates amet et quis praesentium qui senda para</p>
-                            <div class="social">
-                                <a href=""><i class="ri-twitter-fill"></i></a>
-                                <a href=""><i class="ri-facebook-fill"></i></a>
-                                <a href=""><i class="ri-instagram-fill"></i></a>
-                                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="member d-flex align-items-start">
-                        <div class="pic"><img src="../../assets/img/team/team-3.jpg" class="img-fluid" alt=""></div>
-                        <div class="member-info">
-                            <h4>William Anderson</h4>
-                            <span>CTO</span>
-                            <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
-                            <div class="social">
-                                <a href=""><i class="ri-twitter-fill"></i></a>
-                                <a href=""><i class="ri-facebook-fill"></i></a>
-                                <a href=""><i class="ri-instagram-fill"></i></a>
-                                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="400">
-                    <div class="member d-flex align-items-start">
-                        <div class="pic"><img src="../../assets/img/team/team-4.jpg" class="img-fluid" alt=""></div>
-                        <div class="member-info">
-                            <h4>Amanda Jepson</h4>
-                            <span>Accountant</span>
-                            <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
-                            <div class="social">
-                                <a href=""><i class="ri-twitter-fill"></i></a>
-                                <a href=""><i class="ri-facebook-fill"></i></a>
-                                <a href=""><i class="ri-instagram-fill"></i></a>
-                                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="row" id="blog-of-account">
             </div>
 
         </div>
