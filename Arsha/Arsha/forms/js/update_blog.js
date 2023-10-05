@@ -67,7 +67,7 @@ function updateNewBlog() {
     }
     console.log("line3")
     console.log(blog)
-    let formData =new FormData();
+    let formData = new FormData();
         formData.append("blog", new Blob([JSON.stringify(blog)], {type: 'application/json'}));
         formData.append("file", file)
     console.log(formData)
