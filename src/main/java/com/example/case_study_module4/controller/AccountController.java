@@ -42,7 +42,15 @@ public class AccountController {
     public ResponseEntity<List<AccountDTO>> getAllAccount() {
         return new ResponseEntity<>(accountService.findAll(), HttpStatus.OK);
     }
-
+    @GetMapping("/searchAccountByName/{name}")
+    public ResponseEntity<AccountDTO> searchAccountByName(@PathVariable String name) {
+        Account account = accountService.findByAccountName(name);
+        if (account != null) {
+            AccountDTO accountDTO = accountService.toDTO(account);
+            return new ResponseEntity<>(accountDTO, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Account account) {
         // phương thức này sẽ trả về một token
@@ -106,7 +114,20 @@ public class AccountController {
         }
         return new ResponseEntity<>("Thông tin không đúng!", HttpStatus.BAD_REQUEST);
     }
-
+    @PostMapping("/changePassword")
+    public ResponseEntity<String> changePassword(@RequestBody Account account) {
+        Account account1 = accountService.findByAccountName(account.getName());
+        if (account1 != null) {
+            if (account1.getName().equals(account.getName())
+                    && account1.getPhone().equals(account.getPhone())
+                    && account1.getEmail().equals(account.getEmail())) {
+                account1.setPassword(passwordEncoder.encode(account.getPassword()));
+                accountService.save(account1);
+                return new ResponseEntity<>("Đổi mật khẩu thành công!", HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>("Thông tin không đúng!", HttpStatus.BAD_REQUEST);
+    }
     @DeleteMapping("/deleteAccount/{id}")
     public ResponseEntity<String> deleteAccount(@PathVariable Long id) {
         AccountDTO account = accountService.findById(id);

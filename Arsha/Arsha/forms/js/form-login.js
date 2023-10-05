@@ -30,7 +30,7 @@ function login() {
                 window.location.href = "admin-page.html"
             } else {
             // nếu là trang user chuyển về trang user
-                window.location.href = "index.html"
+                window.location.href = "home-user.html"
             }
         },
         error: function () {
