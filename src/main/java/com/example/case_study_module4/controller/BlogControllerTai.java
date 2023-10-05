@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -62,6 +63,13 @@ public class BlogControllerTai {
     @GetMapping("/findBlogByAccount/{id}")
     public ResponseEntity<List<Blog>> findBlogByAccount(@PathVariable Long id) {
         List<Blog> blogs = blogService.listBlogByAccount(id);
+        Collections.reverse(blogs);
+        return new ResponseEntity<>(blogs, HttpStatus.OK);
+    }
+    @GetMapping("/findAllBlog")
+    public ResponseEntity<List<Blog>> findAllBlog() {
+        List<Blog> blogs = blogService.findALl();
+        Collections.reverse(blogs);
         return new ResponseEntity<>(blogs, HttpStatus.OK);
     }
 

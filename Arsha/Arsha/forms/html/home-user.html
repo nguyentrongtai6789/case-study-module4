@@ -43,7 +43,7 @@
     <style>
         #content-blog-of-account {
             display: -webkit-box;
-            -webkit-line-clamp: 5;
+            -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
@@ -56,15 +56,15 @@
 <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center">
 
-        <h1 class="logo me-auto"><a href="index.html">SPRING</a></h1>
+        <h1 class="logo me-auto"><a href="#all-blog">SPRING</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-        <nav id="navbar" class="navbar">
+        <nav id="navbar" class="navbar" >
             <ul>
                 <li><a class="nav-link scrollto active" href="#contact">Tạo bài viết mới</a></li>
                 <li><a class="nav-link scrollto" href="#about">Tài khoản</a></li>
-                <li><a class="nav-link scrollto" href="#team">Bài viết của bạn</a></li>
+                <li><a class="nav-link scrollto" href="#blog-account">Bài viết của bạn</a></li>
                 <li class="dropdown"><a href="#"><span>Danh mục</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li><a href="#">Drop Down 1</a></li>
@@ -133,20 +133,20 @@
                           enctype="multipart/form-data" id="form-create-blog">
                         <div class="row">
                             <div class="form-group" style="text-align: center;">
-                                <span>Tiêu đề của bài viết:</span>
+                                <h4>Tiêu đề:</h4>
                                 <input type="text" class="form-control" id="title-create" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <span>Lựa chọn danh mục của bài viết:</span>
+                            <h4>Lựa chọn danh mục:</h4>
                             <span id="category-create"></span>
                         </div>
                         <div class="form-group">
-                            <span>Chọn ảnh:</span><br>
+                            <h4>Chọn ảnh:</h4><br>
                             <input type="file" id="image-create">
                         </div>
                         <div class="form-group">
-                            <span>Nhập nội dung của bài viết:</span>
+                            <h4>Nhập nội dung của bài viết:</h4>
                             <textarea class="form-control" name="message" rows="10" id="content-create"
                                       required></textarea>
                         </div>
@@ -190,19 +190,32 @@
 
 
     <!-- ======= Hiển thị bài viết của bạn ======= -->
-    <section id="team" class="team section-bg">
+    <section id="blog-account" class="team section-bg">
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
                 <h2>Bài viết của bạn</h2>
             </div>
 
-            <div class="row" id="blog-of-account">
+            <div class="row" id="blog-of-account" >
             </div>
 
         </div>
-    </section><!-- End Team Section -->
+    </section>
+    <!-- Hết hiển thị bài viết của bạn -->
+    <!-- ======= Hiển thị tất cả bài viết ======= -->
+    <section id="all-blog" class="team section-bg">
+        <div class="container" data-aos="fade-up">
 
+            <div class="section-title">
+                <h2>Tất cả bài viết</h2>
+            </div>
+            <div class="row" id="blog-of-all-account" >
+            </div>
+
+        </div>
+    </section>
+    <!-- Hết hiển thị tất cả bài viết -->
 
     <!-- ======= Contact Section ======= -->
 
