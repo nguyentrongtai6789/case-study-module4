@@ -62,9 +62,20 @@ function blogByAccount(data) {
         "                <div class=\"social\">\n" +
         "                  <button  style='width: 100px; border-radius: 20px; background-color: #6791cd' onclick='showBlog(" + data.id + ")'>Xem chi tiết</button>" +
         "                  <button  style='width: 100px; border-radius: 20px; background-color: #6791cd' onclick='update(" + data.id + ")'>Update</button>" +
-        "                  <button  style='width: 100px; border-radius: 20px; background-color: #6791cd' onclick='update(" + data.id + ")'>Delete</button>" +
+        "                  <button  style='width: 100px; border-radius: 20px; background-color: #6791cd' onclick='deleteBlog(" + data.id + ")'>Delete</button>" +
         "                </div>\n" +
         "              </div>" +
         "              </div>" +
         "          </div>";
+}
+function deleteBlog(id_blog) {
+    console.log("blabla" + id_blog);
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/api/blog/delete/" +id_blog,
+        success:function (){
+            alert("Bạn vừa xóa 1 bài viết của mình");
+            window.location.href = "../html/home-user2.html";
+        }
+    })
 }
