@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface IBlogRepository extends JpaRepository<Blog, Long> {
-    @Query(value = "select * from case_study_modul4 where id_account = ?", nativeQuery = true)
+    @Query(value = "select * from blog where id_account = ?", nativeQuery = true)
     List<Blog> disPlayListBlogByIdAccount(Long id_account);
 }
