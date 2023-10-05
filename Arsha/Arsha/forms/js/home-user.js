@@ -2,22 +2,16 @@ function loadHomeUser() {
     fillAccountInformation();
     loadCategory();
     blogOfAccount();
-    blockNoImage();
     event.preventDefault()
 }
-function blockNoImage() {
-    let blogImage = document.getElementById("blogImage");
-    if (blogImage.src === "" | blogImage.src === null | blogImage.src === undefined) {
-        blogImage.style.display = "none";
-    }
-}
+
 function loadCategory() {
     $.ajax({
         url: "http://localhost:8080/api/category",
         type: "GET",
         success: function (categories) {
             let content = `<select id="category-select">`
-            for (let i = 0; i < categories.length; i ++) {
+            for (let i = 0; i < categories.length; i++) {
                 content += `<option value="${categories[i].id}">${categories[i].name}</option>`
             }
             content += "</select>"
@@ -25,6 +19,7 @@ function loadCategory() {
         }
     })
 }
+
 function fillAccountInformation() {
     let name = localStorage.getItem("account-name");
     document.getElementById("name-account").innerHTML = name;
@@ -40,6 +35,7 @@ function fillAccountInformation() {
     })
     event.preventDefault()
 }
+
 function createNewBlog() {
     let title = $("#title-create").val()
     let content = $("#content-create").val()
@@ -83,21 +79,25 @@ function createNewBlog() {
     })
     event.preventDefault()
 }
+
 function blogOfAccount() {
     let id = localStorage.getItem("id-account")
     $.ajax({
-        url:"http://localhost:8080/api/blog2/findBlogByAccount/" + id,
+        url: "http://localhost:8080/api/blog2/findBlogByAccount/" + id,
         type: "GET",
         success: function (blogs) {
             let content = ""
             for (let i = 0; i < blogs.length; i++) {
                 content += ` <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="0">
                     <div class="member d-flex align-items-start">
-                        <div class="member-info">
+                        <div class="member-info" style="">
                             <h4>Tiêu đề: ${blogs[i].title}</h4>
-                            <span>Ngày đăng: ${blogs[i].date}</span>
-                            <img src="/src/main/resources/static/img/${blogs[i].url_img}" id="blogImage" alt="" style="width: 330px; height: 200px">
-                            <p>Nội dung: ${blogs[i].content}</p>
+                            <span>Ngày đăng: ${blogs[i].date}</span>`;
+                if (blogs[i].url_img) {
+                    content += `<img src="/src/main/resources/static/img/${blogs[i].url_img}" id="blogImage" alt="" style="width: 325px; height: 200px">`
+                }
+                content += `
+                            <p style="text-align: justify; width: 325px">Nội dung: ${blogs[i].content}</p>
                             <div class="social">
                                 <a href=""><i class="ri-twitter-fill"></i></a>
                                 <a href=""><i class="ri-facebook-fill"></i></a>
