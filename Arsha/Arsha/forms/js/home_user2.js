@@ -1,4 +1,3 @@
-
 function showListCategory() {
     $.ajax({
         type: "GET",
@@ -7,17 +6,32 @@ function showListCategory() {
             console.log("category = " + data)
             let content = ""
             if (data.length !== null) {
-                for (let i = 0; i < data,length; i++) {
-                    content += "<li value=\"" + data[i].id +"\" onclick=\"\">" + data[i].name +"</li>"
+                for (let i = 0; i < data.length; i++) {
+                    content += "<li onclick=\"searchByCategory(" + data[i].id + ")\"><a href=\"#blogs_C\"\">" + data[i].name + "</a></li>"
                 }
             }
-            document.getElementById("L-category").innerHTML = content;
+            console.log("cont= " + content);
+            document.getElementById("L_category").innerHTML = content;
         }
     })
 
 }
+
 function searchByCategory(id_category) {
 
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/api/blog/search_by_category/" + id_category,
+        success: function (data){
+            let content = "";
+            if (data.length !== null){
+                for (let i = 0; i < data.length; i++) {
+                    content += blogs(data[i]);
+                }
+            }
+            document.getElementById("blogs_by_category").innerHTML = content;
+        }
+    })
 }
 
 function disPlayBlogs() {
@@ -59,7 +73,7 @@ function disPlayBlogsByAccount() {
     let id_account = localStorage.getItem("id_account");
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/api/blog/display/" + 1,
+        url: "http://localhost:8080/api/blog/display/" + 2,
         success: function (data) {
             console.log("x= " + data)
             let content = "";
@@ -90,14 +104,32 @@ function blogByAccount(data) {
         "              </div>" +
         "          </div>";
 }
+
 function deleteBlog(id_blog) {
     console.log("blabla" + id_blog);
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/api/blog/delete/" +id_blog,
-        success:function (){
+        url: "http://localhost:8080/api/blog/delete/" + id_blog,
+        success: function () {
             alert("Bạn vừa xóa 1 bài viết của mình");
             window.location.href = "../html/home-user2.html";
         }
     })
+}
+function searchByTitle() {
+    let title = document.getElementById("tim_kiem").value;
+    $.ajax({
+        type: "GET",
+        url:"http://localhost:8080/api/blog/search_by_title/" + title,
+        success: function (data) {
+            let content = "";
+            if (data.length !== 0){
+                for (let i = 0; i < data.length; i++) {
+                    content += blogs(data[i]);
+                }
+            }
+            document.getElementById("list_blog").innerHTML = content;
+        }
+    })
+    event.preventDefault();
 }

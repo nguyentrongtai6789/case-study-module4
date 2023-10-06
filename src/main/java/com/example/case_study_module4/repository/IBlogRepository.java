@@ -11,4 +11,6 @@ import java.util.List;
 public interface IBlogRepository extends JpaRepository<Blog, Long> {
     @Query(value = "select * from blog where id_account = ?", nativeQuery = true)
     List<Blog> disPlayListBlogByIdAccount(Long id_account);
+    @Query(value = "select * from blog where title like %?%", nativeQuery = true)
+    List<Blog> searchByTitle(String title);
 }

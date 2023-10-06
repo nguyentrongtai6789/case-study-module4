@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class BlogService implements IBlogService {
@@ -41,5 +42,22 @@ public class BlogService implements IBlogService {
     @Override
     public List<Blog> listBlogByAccount(Long id_account) {
         return blogRepository.disPlayListBlogByIdAccount(id_account);
+    }
+    @Override
+    public List<Blog> searchByCategory(Long id_category){
+        List<Blog> blogs = blogRepository.findAll();
+        List<Blog> blogList = new ArrayList<>();
+        for (int i = 0; i < blogs.size(); i++) {
+            if (blogs.get(i).getCategory().getId() == id_category){
+                blogList.add(blogs.get(i));
+            }
+        }
+        return blogList;
+    }
+
+    @Override
+    public List<Blog> searchByTitleBlog(String title) {
+        List<Blog> blogs = blogRepository.searchByTitle(title);
+        return blogs;
     }
 }

@@ -72,7 +72,7 @@ public class BlogController {
     private void getImagePath(Blog blog, MultipartFile file) {
         if (file.getSize() == 0) {
             if (Objects.equals(blog.getId(), null)) {
-                blog.setUrl_img("oto2.jpg");
+                blog.setUrl_img("anh_bua.JPG");
             }
         } else {
             String name = file.getOriginalFilename();
@@ -83,5 +83,15 @@ public class BlogController {
             }
            blog.setUrl_img(name);
         }
+    }
+
+    @GetMapping("/search_by_category/{id_category}")
+    public ResponseEntity<List<Blog>> searchByCategory(@PathVariable("id_category") Long id_category){
+        return new ResponseEntity<>(iBlogService.searchByCategory(id_category), HttpStatus.OK);
+    }
+
+    @GetMapping("/search_by_title/{title}")
+    public ResponseEntity<List<Blog>> searchByTitle(@PathVariable("title") String title){
+        return new ResponseEntity<>(iBlogService.searchByTitleBlog(title), HttpStatus.OK);
     }
 }
