@@ -15,6 +15,10 @@ function fillBlogEditInformation() {
 function displayLike(id_blog) {
     // hiển thị sô lượng like của blog:
     $.ajax({
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }, // phải có cái headers này chú ý!!!!
         url: "http://localhost:8080/api/like/findAllLike",
         type: "GET",
         success: function (likes) {
@@ -34,6 +38,10 @@ function displayLike(id_blog) {
 }
 function showAllAccountLikeThisBlog(id_blog) {
     $.ajax({
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }, // phải có cái headers này chú ý!!!!
         url: "http://localhost:8080/api/like/findAllLike",
         type: "GET",
         success: function (likes) {
@@ -50,6 +58,10 @@ function showAllAccountLikeThisBlog(id_blog) {
 }
 function fillAllCommentOfBlogDetail(id) {
     $.ajax({
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }, // phải có cái headers này chú ý!!!!
         url: "http://localhost:8080/api/comment/findAllCommentOfBlog/" + id,
         type: "GET",
         success: function (comments) {
