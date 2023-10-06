@@ -97,7 +97,7 @@ function blogOfAccount() {
                   
                         <div class="member-info" style="">
                          <div class="social">
-                         <a href="" onclick=""><i class="ri-settings-3-fill"></i></a>
+                         <a href="" onclick="editBlog(${blogs[i].id})"><i class="ri-settings-3-fill"></i></a>
                            </div>
                             <h6>Tiêu đề: ${blogs[i].title}</h6>
                             <p style="margin-bottom: 10px">Ngày đăng: ${blogs[i].date}</p>`;
@@ -141,13 +141,23 @@ function blogOfAccount() {
                 document.getElementById("blog-of-account").innerHTML = content;
             }
             if (blogs.length === 0) {
-                document.getElementById("blog-of-account").innerHTML = "Bạn chưa có bài viết nào!";
+                document.getElementById("blog-of-account").innerHTML = "<p style='text-align: center'>Bạn chưa có bài viết nào!</p>";
             }
         }
     })
     event.preventDefault()
 }
-
+function editBlog(id_blog) {
+    $.ajax({
+        url: "http://localhost:8080/api/blog2/findById/" + id_blog,
+        type: "GET",
+        success: function (blog_edit) {
+            localStorage.setItem("blog_edit", JSON.stringify(blog_edit))
+            window.open("page-edit-blog.html", "_blank");
+        }
+    })
+    event.preventDefault()
+}
 function allBlog() {
     $.ajax({
         url: "http://localhost:8080/api/blog2/findAllBlog",
@@ -160,7 +170,7 @@ function allBlog() {
                   
                         <div class="member-info" style="">
                          <div class="social">
-                         <a href=""><i class="ri-settings-3-fill"></i></a>
+<!--                         <a href=""><i class="ri-settings-3-fill"></i></a>-->
                            </div>
                             <h6>Tiêu đề: ${blogs[i].title}</h6>
                             <p style="margin-bottom: 10px">Ngày đăng: ${blogs[i].date}</p>`;
