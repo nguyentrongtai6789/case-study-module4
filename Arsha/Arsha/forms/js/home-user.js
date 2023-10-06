@@ -174,9 +174,9 @@ function allBlog() {
                     `<hr>
                             <div class="social">
                             <a href="#" onclick="likeBlog2(${blogs[i].id})"> <i class="ri-user-heart-line" id="like-blog-of-account-${blogs[i].id}-2" style="color: blue"></i></a>
-                           <p>Số lượt thích:</p>
+                          <span id="number-like-${blogs[i].id}-2"></span>
                              </div>
-                             
+                            
                             <span id="all-comment-of-blog-${blogs[i].id}-2"></span>
                              <textarea style="margin-top: 5px" class="form-control" name="message" rows="2" id="content-comment-blog-${blogs[i].id}-2" placeholder="Bình luận" required></textarea>
                              <a href="#" onclick="commentBlog2(${blogs[i].id})">Bình luận</a>
@@ -297,16 +297,18 @@ function displayLike(id_blog) {
         url: "http://localhost:8080/api/like/findAllLike",
         type: "GET",
         success: function (likes) {
-            let number_like_of_blog = 0;
+            let number_like = 0;
             for (let i = 0; i < likes.length; i++) {
                 if (likes[i].account.id == id_account && likes[i].blog.id == id_blog) {
                     document.getElementById(`like-blog-of-account-${id_blog}`).style.color = "red";
+                    document.getElementById(`like-blog-of-account-${id_blog}-2`).style.color = "red";
                 }
                 if (likes[i].blog.id == id_blog) {
-                    number_like_of_blog++;
+                    number_like ++;
                 }
             }
-            document.getElementById(`number-like-${id_blog}-1`).innerHTML = `${number_like_of_blog}`;
+            document.getElementById(`number-like-${id_blog}-1`).innerHTML = `${number_like}`
+            document.getElementById(`number-like-${id_blog}-2`).innerHTML = `${number_like}`
         }
     })
 }
@@ -332,6 +334,8 @@ function likeBlog(id) {
             data: JSON.stringify(like),
             success: function () {
                 document.getElementById(`like-blog-of-account-${id}`).style.color = "blue";
+                document.getElementById(`like-blog-of-account-${id}-2`).style.color = "blue";
+                displayLike(id)
             }
         })
     } else {
@@ -353,6 +357,7 @@ function likeBlog(id) {
             data: JSON.stringify(like),
             success: function () {
                 document.getElementById(`like-blog-of-account-${id}`).style.color = "red";
+                displayLike(id)
             }
         })
     }
@@ -380,6 +385,7 @@ function likeBlog2(id) {
             success: function () {
                 document.getElementById(`like-blog-of-account-${id}-2`).style.color = "blue";
                 document.getElementById(`like-blog-of-account-${id}`).style.color = "blue";
+                displayLike(id)
             }
         })
     } else {
@@ -402,6 +408,7 @@ function likeBlog2(id) {
             success: function () {
                 document.getElementById(`like-blog-of-account-${id}-2`).style.color = "red";
                 document.getElementById(`like-blog-of-account-${id}`).style.color = "red";
+                displayLike(id)
             }
         })
     }
