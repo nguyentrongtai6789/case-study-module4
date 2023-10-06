@@ -148,15 +148,7 @@ function blogOfAccount() {
     event.preventDefault()
 }
 function editBlog(id_blog) {
-    $.ajax({
-        url: "http://localhost:8080/api/blog2/findById/" + id_blog,
-        type: "GET",
-        success: function (blog_edit) {
-            localStorage.setItem("blog_edit", JSON.stringify(blog_edit))
-            window.open("page-edit-blog.html", "_blank");
-        }
-    })
-    event.preventDefault()
+    // viết phương thức chuyển sang trang edit blog ở đây
 }
 function allBlog() {
     $.ajax({
@@ -181,7 +173,7 @@ function allBlog() {
                 content += `
                             <h6 style="text-align: justify; width: 325px; margin-top: 10px" id="content-blog-of-account">${blogs[i].content}</h6>`
                 if (blogs[i].content.length > 100) {
-                    content += `<a href="">Xem thêm</a>`
+                    content += `<a href="#" onclick="detailsBlog()">Xem thêm</a>`
                 }
 
 
@@ -217,7 +209,19 @@ function allBlog() {
     })
     event.preventDefault()
 }
-
+function detailsBlog() {
+    $.ajax({
+        url: "http://localhost:8080/api/blog2/findById/" + id_blog,
+        type: "GET",
+        success: function (blog_edit) {
+            localStorage.setItem("blog_edit", JSON.stringify(blog_edit))
+            window.open("page-edit-blog.html", "_blank");
+        }
+    })
+    event.preventDefault()
+    alert("OK")
+    event.preventDefault()
+}
 function fillAllCommentOfBlog2(id) {
     $.ajax({
         url: "http://localhost:8080/api/comment/findAllCommentOfBlog/" + id,
@@ -232,7 +236,7 @@ function fillAllCommentOfBlog2(id) {
                     content += `${comments[1].content}`
                 }
                 if (comments.length > 2) {
-                    content += `<br><a href="#">Xem thêm</a>`
+                    content += `<br><a href="#" onclick="detailsBlog()">Xem thêm</a>`
                 }
                 // document.getElementById(`all-comment-of-blog-${id}`).innerHTML = content;
                 document.getElementById(`all-comment-of-blog-${id}-2`).innerHTML = content;
