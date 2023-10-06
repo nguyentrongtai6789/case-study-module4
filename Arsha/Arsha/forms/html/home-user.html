@@ -40,18 +40,6 @@
           integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="../js/home-user.js"></script>
-
-    <script src="../js/home_user2.js"></script>
-    <script src="../js/update_blog.js"></script>
-    <script src="../js/chi_tiet_1_blog.js"></script>
-    <style>
-        #content-blog-of-account {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-    </style>
 </head>
 
 <body onload="loadHomeUser()">
@@ -60,18 +48,17 @@
 <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center">
 
-        <h1 class="logo me-auto"><a href="#all-blog">SPRING</a></h1>
+        <h1 class="logo me-auto"><a href="index.html">SPRING</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-        <nav id="navbar" class="navbar" >
+        <nav id="navbar" class="navbar">
             <ul>
-                <li><a class="nav-link scrollto active" href="#blogs" onclick="disPlayBlogs()">Danh sách bài viết</a></li>
                 <li><a class="nav-link scrollto active" href="#contact">Tạo bài viết mới</a></li>
                 <li><a class="nav-link scrollto" href="#about">Tài khoản</a></li>
-                <li><a class="nav-link scrollto" href="#team" onclick="disPlayBlogsByAccount()">Bài viết của bạn</a></li>
+                <li><a class="nav-link scrollto" href="#team">Bài viết của bạn</a></li>
                 <li class="dropdown"><a href="#"><span>Danh mục</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul id="L_category">
+                    <ul>
                         <li><a href="#">Drop Down 1</a></li>
                         <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
                             <ul>
@@ -89,11 +76,7 @@
                 </li>
                 <li><a class="nav-link scrollto" href="#contact">Liên hệ</a></li>
                 <li style="margin-left:30px ">
-                    <form>
-                        <input id="tim_kiem" type="text" class="input-group" placeholder="Tìm kiếm">
-                        <input type="submit" onclick="searchByTitle()" href="#blogs">
-                    </form>
-                </li>
+                    <input type="text" class="input-group" placeholder="Tìm kiếm"></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
@@ -111,6 +94,7 @@
                 <h1>Tin Nóng</h1>
                 <h2>Đọc báo hàng ngày sẽ giúp bạn tinh thông nhiều kiến thức xã hội hơn =>> bên dưới là video một tin
                     nóng ngày hôm nay
+                    <hơn></hơn>
                 </h2>
                 <div class="d-flex justify-content-center justify-content-lg-start">
                     <a href="#about" class="btn-get-started scrollto">Click để xem =></a>
@@ -125,18 +109,6 @@
     </div>
 
 </section><!-- End Hero -->
-
-<section id="blogs" class="team section-bg">
-    <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-            <h2>Danh sách blog</h2>
-        </div>
-
-        <div class="row" id="list_blog"></div>
-
-    </div>
-</section><!-- End danh sách blog  -->
 
 <main id="main">
     <!-- create blog -->
@@ -156,20 +128,20 @@
                           enctype="multipart/form-data" id="form-create-blog">
                         <div class="row">
                             <div class="form-group" style="text-align: center;">
-                                <h4>Tiêu đề:</h4>
+                                <span>Tiêu đề của bài viết:</span>
                                 <input type="text" class="form-control" id="title-create" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <h4>Lựa chọn danh mục:</h4>
+                            <span>Lựa chọn danh mục của bài viết:</span>
                             <span id="category-create"></span>
                         </div>
                         <div class="form-group">
-                            <h4>Chọn ảnh:</h4><br>
+                            <span>Chọn ảnh:</span><br>
                             <input type="file" id="image-create">
                         </div>
                         <div class="form-group">
-                            <h4>Nhập nội dung của bài viết:</h4>
+                            <span>Nhập nội dung của bài viết:</span>
                             <textarea class="form-control" name="message" rows="10" id="content-create"
                                       required></textarea>
                         </div>
@@ -213,32 +185,19 @@
 
 
     <!-- ======= Hiển thị bài viết của bạn ======= -->
-    <section id="blog-account" class="team section-bg">
+    <section id="team" class="team section-bg">
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
                 <h2>Bài viết của bạn</h2>
             </div>
 
-            <div class="row" id="blog-of-account" >
+            <div class="row" id="blog-of-account">
             </div>
 
         </div>
-    </section>
-    <!-- Hết hiển thị bài viết của bạn -->
-    <!-- ======= Hiển thị tất cả bài viết ======= -->
-    <section id="all-blog" class="team section-bg">
-        <div class="container" data-aos="fade-up">
+    </section><!-- End Team Section -->
 
-            <div class="section-title">
-                <h2>Tất cả bài viết</h2>
-            </div>
-            <div class="row" id="blog-of-all-account" >
-            </div>
-
-        </div>
-    </section>
-    <!-- Hết hiển thị tất cả bài viết -->
 
     <!-- ======= Contact Section ======= -->
 
