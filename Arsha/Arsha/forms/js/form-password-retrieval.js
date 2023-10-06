@@ -105,7 +105,8 @@ function passwordRetrieval() {
     let account = JSON.parse(localStorage.getItem("account-retrieval-password"));
     $.ajax({
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
         }, // phải có cái headers này chú ý!!!!
         url: "http://localhost:8080/api/passwordRetrieval",
         type: "POST",
