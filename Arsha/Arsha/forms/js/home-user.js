@@ -96,7 +96,7 @@ function blogOfAccount() {
                   
                         <div class="member-info" style="">
                          <div class="social">
-                         <a href=""><i class="ri-settings-3-fill"></i></a>
+                         <a href="" onclick=""><i class="ri-settings-3-fill"></i></a>
                            </div>
                             <h6>Tiêu đề: ${blogs[i].title}</h6>
                             <p style="margin-bottom: 10px">Ngày đăng: ${blogs[i].date}</p>`;
@@ -114,7 +114,7 @@ function blogOfAccount() {
                     `<hr>
                             <div class="social">
                             <a href="#" onclick="likeBlog(${blogs[i].id})"> <i class="ri-user-heart-line" id="like-blog-of-account-${blogs[i].id}" style="color: blue"></i></a>
-                           <p>Số lượt thích:</p>
+                           <span id="number-like-${blogs[i].id}-1"></span>
                              </div>
                              
                             <span id="all-comment-of-blog-${blogs[i].id}"></span>
@@ -173,7 +173,7 @@ function allBlog() {
                 content +=
                     `<hr>
                             <div class="social">
-                            <a href="#" onclick="likeBlog(${blogs[i].id})"> <i class="ri-user-heart-line" id="like-blog-of-account-${blogs[i].id}" style="color: blue"></i></a>
+                            <a href="#" onclick="likeBlog2(${blogs[i].id})"> <i class="ri-user-heart-line" id="like-blog-of-account-${blogs[i].id}-2" style="color: blue"></i></a>
                            <p>Số lượt thích:</p>
                              </div>
                              
@@ -297,11 +297,16 @@ function displayLike(id_blog) {
         url: "http://localhost:8080/api/like/findAllLike",
         type: "GET",
         success: function (likes) {
+            let number_like_of_blog = 0;
             for (let i = 0; i < likes.length; i++) {
                 if (likes[i].account.id == id_account && likes[i].blog.id == id_blog) {
                     document.getElementById(`like-blog-of-account-${id_blog}`).style.color = "red";
                 }
+                if (likes[i].blog.id == id_blog) {
+                    number_like_of_blog++;
+                }
             }
+            document.getElementById(`number-like-${id_blog}-1`).innerHTML = `${number_like_of_blog}`;
         }
     })
 }
@@ -347,6 +352,55 @@ function likeBlog(id) {
             type: "POST",
             data: JSON.stringify(like),
             success: function () {
+                document.getElementById(`like-blog-of-account-${id}`).style.color = "red";
+            }
+        })
+    }
+    event.preventDefault()
+}
+function likeBlog2(id) {
+    let a = document.getElementById(`like-blog-of-account-${id}-2`)
+    if (a.style.color === "red") {
+        let id_account = localStorage.getItem("id-account");
+        let like = {
+            blog: {
+                id: id
+            },
+            account: {
+                id: id_account
+            }
+        }
+        $.ajax({
+            headers: {
+                "Content-Type": "application/json"
+            }, // phải có cái headers này chú ý!!!!
+            url: "http://localhost:8080/api/like/unLike",
+            type: "DELETE",
+            data: JSON.stringify(like),
+            success: function () {
+                document.getElementById(`like-blog-of-account-${id}-2`).style.color = "blue";
+                document.getElementById(`like-blog-of-account-${id}`).style.color = "blue";
+            }
+        })
+    } else {
+        let id_account = localStorage.getItem("id-account");
+        let like = {
+            blog: {
+                id: id
+            },
+            account: {
+                id: id_account
+            }
+        }
+        $.ajax({
+            headers: {
+                "Content-Type": "application/json"
+            }, // phải có cái headers này chú ý!!!!
+            url: "http://localhost:8080/api/like/createLike",
+            type: "POST",
+            data: JSON.stringify(like),
+            success: function () {
+                document.getElementById(`like-blog-of-account-${id}-2`).style.color = "red";
                 document.getElementById(`like-blog-of-account-${id}`).style.color = "red";
             }
         })
