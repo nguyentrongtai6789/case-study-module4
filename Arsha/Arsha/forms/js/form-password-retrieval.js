@@ -112,6 +112,7 @@ function passwordRetrieval() {
         data: JSON.stringify(account),
         success: function () {
             alert("Lấy lại mật khẩu thành công!")
+            localStorage.clear();
             window.location.href = "form-login.html"
         },
         error: function (xhr) {

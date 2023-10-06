@@ -1,3 +1,4 @@
+
 function loadHomeUser() {
     showListCategory_user();
     fillAccountInformation();
@@ -5,6 +6,9 @@ function loadHomeUser() {
     allBlog();
     let id = localStorage.getItem("id-account");
     $.ajax({
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        },
         url: "http://localhost:8080/api/blog2/findBlogByAccount/" + id,
         type: "GET",
         success: function (blogs) {
@@ -18,6 +22,9 @@ function loadHomeUser() {
 
 function loadCategory() {
     $.ajax({
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        },
         url: "http://localhost:8080/api/category",
         type: "GET",
         success: function (categories) {
@@ -35,6 +42,9 @@ function fillAccountInformation() {
     let name = localStorage.getItem("account-name");
     document.getElementById("name-account").innerHTML = name;
     $.ajax({
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        },
         url: "http://localhost:8080/api/searchAccountByName/" + name,
         type: "GET",
         success: function (account) {
@@ -78,6 +88,9 @@ function createNewBlog() {
     formData.append("blog", new Blob([JSON.stringify(blog)], {type: "application/json"}))
     formData.append("file", file)
     $.ajax({
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        },
         url: "http://localhost:8080/api/blog2/createNewBlog",
         type: "POST",
         processData: false,
@@ -97,6 +110,9 @@ function createNewBlog() {
 function blogOfAccount() {
     let id = localStorage.getItem("id-account")
     $.ajax({
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        },
         url: "http://localhost:8080/api/blog2/findBlogByAccount/" + id,
         type: "GET",
         success: function (blogs) {
@@ -165,6 +181,9 @@ function editBlog(id_blog) {
 
 function allBlog() {
     $.ajax({
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        },
         url: "http://localhost:8080/api/blog2/findAllBlog",
         type: "GET",
         success: function (blogs) {
@@ -225,6 +244,9 @@ function allBlog() {
 
 function detailsBlog(id_blog) {
     $.ajax({
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        },
         url: "http://localhost:8080/api/blog2/findById/" + id_blog,
         type: "GET",
         success: function (blog_edit) {
@@ -237,6 +259,9 @@ function detailsBlog(id_blog) {
 
 function fillAllCommentOfBlog2(id) {
     $.ajax({
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        },
         url: "http://localhost:8080/api/comment/findAllCommentOfBlog/" + id,
         type: "GET",
         success: function (comments) {
@@ -264,6 +289,9 @@ function fillAllCommentOfBlog2(id) {
 
 function fillAllCommentOfBlog1(id) {
     $.ajax({
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        },
         url: "http://localhost:8080/api/comment/findAllCommentOfBlog/" + id,
         type: "GET",
         success: function (comments) {
@@ -307,7 +335,8 @@ function commentBlog2(id) {
     }
     $.ajax({
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
         }, // phải có cái headers này chú ý!!!!
         url: "http://localhost:8080/api/comment/createCommentByAccount",
         type: "POST",
@@ -338,8 +367,10 @@ function commentBlog(id) {
         }
     }
     $.ajax({
+
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
         }, // phải có cái headers này chú ý!!!!
         url: "http://localhost:8080/api/comment/createCommentByAccount",
         type: "POST",
@@ -356,6 +387,9 @@ function commentBlog(id) {
 function displayLike2(id_blog) {
     let id_account = localStorage.getItem("id-account");
     $.ajax({
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }, // phải có cái headers này chú ý!!!!
         url: "http://localhost:8080/api/like/findAllLike",
         type: "GET",
         success: function (likes) {
@@ -382,6 +416,9 @@ function displayLike2(id_blog) {
 function displayLike1(id_blog) {
     let id_account = localStorage.getItem("id-account");
     $.ajax({
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }, // phải có cái headers này chú ý!!!!
         url: "http://localhost:8080/api/like/findAllLike",
         type: "GET",
         success: function (likes) {
@@ -418,7 +455,8 @@ function likeBlog(id) {
         }
         $.ajax({
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token")
             }, // phải có cái headers này chú ý!!!!
             url: "http://localhost:8080/api/like/unLike",
             type: "DELETE",
@@ -442,7 +480,8 @@ function likeBlog(id) {
         }
         $.ajax({
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token")
             }, // phải có cái headers này chú ý!!!!
             url: "http://localhost:8080/api/like/createLike",
             type: "POST",
@@ -472,7 +511,8 @@ function likeBlog2(id) {
         }
         $.ajax({
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token")
             }, // phải có cái headers này chú ý!!!!
             url: "http://localhost:8080/api/like/unLike",
             type: "DELETE",
@@ -499,7 +539,8 @@ function likeBlog2(id) {
         }
         $.ajax({
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token")
             }, // phải có cái headers này chú ý!!!!
             url: "http://localhost:8080/api/like/createLike",
             type: "POST",
@@ -520,6 +561,9 @@ function likeBlog2(id) {
 
 function showListCategory_user() {
     $.ajax({
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }, // phải có cái headers này chú ý!!!!
         type: "GET",
         url: "http://localhost:8080/api/category",
         success: function (data) {
@@ -536,7 +580,10 @@ function showListCategory_user() {
     })
 
 }
-
+function clearLocalStorage() {
+    localStorage.clear();
+    window.location.href = "form-login.html"
+}
 //
 // function searchByCategory_user(id_category) {
 //

@@ -64,10 +64,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().ignoringAntMatchers("/api/**");
         http.httpBasic().authenticationEntryPoint(restServicesEntryPoint());
         http.authorizeRequests()
-                .antMatchers("/api/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/**").hasAnyRole(new String[]{"ADMIN", "USER"})
-                .antMatchers(HttpMethod.POST, "/api/**").hasAnyRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/api/**").hasAnyRole("ADMIN")
+                .antMatchers("/api/login").permitAll()
+                .antMatchers("/api/blog2/**").hasAnyRole("USER")
+                .antMatchers("/api/category").hasAnyRole("USER")
+                .antMatchers("/api/comment/**").hasAnyRole("USER")
+                .antMatchers("/api/like/**").hasAnyRole("USER")
+                .antMatchers("/api/saveAccount").hasAnyRole("USER")
+                .antMatchers("/api/searchAccountByName").hasAnyRole("USER")
+//                .antMatchers(HttpMethod.GET, "/api/**").hasAnyRole(new String[]{"ADMIN", "USER"})
+//                .antMatchers(HttpMethod.POST, "/api/**").hasAnyRole("ADMIN")
+//                .antMatchers(HttpMethod.DELETE, "/api/**").hasAnyRole("ADMIN")
                 .anyRequest().authenticated()
                 .and().csrf().disable();
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)

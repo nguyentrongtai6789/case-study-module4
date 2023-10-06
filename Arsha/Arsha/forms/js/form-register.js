@@ -106,13 +106,15 @@ function addNewAccount() {
     let account = JSON.parse(localStorage.getItem("account-register"));
     $.ajax({
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
         }, // phải có cái headers này chú ý!!!!
         url: "http://localhost:8080/api/saveAccount",
         type: "POST",
         data: JSON.stringify(account),
         success: function () {
             alert("Đăng kí thành công!")
+            localStorage.clear();
             window.location.href = "form-login.html"
         },
         error: function (xhr) {
