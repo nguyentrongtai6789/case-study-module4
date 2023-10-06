@@ -13,9 +13,15 @@ import java.util.List;
 public class LikeService implements ILikeService {
     @Autowired
     private ILikeRepository likeRepository;
+
+    @Override
+    public void deleteByAccountAndBlog(Long id_account, Long id_blog) {
+        likeRepository.deleteByAccountAndBlog(id_account, id_blog);
+    }
+
     @Override
     public List<Like> findALl() {
-        return null;
+        return likeRepository.findAll();
     }
 
     @Override
@@ -25,16 +31,17 @@ public class LikeService implements ILikeService {
 
     @Override
     public void save(Like like) {
-
+        likeRepository.save(like);
     }
 
     @Override
     public Like findById(Long id) {
-        return null;
+        return likeRepository.findById(id).get();
     }
 
     @Override
     public void deleteById(Long id) {
-
+        likeRepository.deleteById(id);
     }
+
 }

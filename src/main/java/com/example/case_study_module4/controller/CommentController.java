@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.html.BlockView;
 import java.time.LocalTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,7 +50,9 @@ public class CommentController {
     public ResponseEntity<List<Comment>> findAllCommentOfBlog(@PathVariable Long id) {
         Blog blog = blogService.findById(id);
         if (blog != null) {
-            return new ResponseEntity<>(commentService.findByBlogId(id), HttpStatus.OK);
+            List<Comment> comments = commentService.findByBlogId(id);
+            Collections.reverse(comments);
+            return new ResponseEntity<>(comments, HttpStatus.OK);
         }
         return null;
     }
