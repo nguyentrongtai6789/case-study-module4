@@ -1,7 +1,4 @@
-function logInAddMin(id_addMin) {
-    localStorage.setItem("id_addMin", id_addMin);
-    window.location.href = "home-user2.html";
-}
+
 
 
 function showListCategory() {
@@ -18,6 +15,20 @@ function showListCategory() {
             }
             console.log("cont= " + content);
             document.getElementById("L_category").innerHTML = content;
+        }
+    })
+
+    let name_addMin = localStorage.getItem("account-name");
+
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/api/searchAccountByName/" + name_addMin,
+        success: function (data) {
+            console.log("data11 = " + data.phone)
+            console.log("data11 = " + data)
+                    document.getElementById("name-account").innerHTML = data.name;
+                    document.getElementById("phone-account").innerHTML = data.phone;
+                    document.getElementById("email-account").innerHTML = data.email;
         }
     })
 
