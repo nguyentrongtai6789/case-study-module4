@@ -40,6 +40,10 @@
           integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="../js/home-user.js"></script>
+
+    <script src="../js/home_user2.js"></script>
+    <script src="../js/update_blog.js"></script>
+    <script src="../js/chi_tiet_1_blog.js"></script>
     <style>
         #content-blog-of-account {
             display: -webkit-box;
@@ -62,11 +66,12 @@
 
         <nav id="navbar" class="navbar" >
             <ul>
+                <li><a class="nav-link scrollto active" href="#blogs" onclick="disPlayBlogs()">Danh sách bài viết</a></li>
                 <li><a class="nav-link scrollto active" href="#contact">Tạo bài viết mới</a></li>
                 <li><a class="nav-link scrollto" href="#about">Tài khoản</a></li>
-                <li><a class="nav-link scrollto" href="#blog-account">Bài viết của bạn</a></li>
+                <li><a class="nav-link scrollto" href="#team" onclick="disPlayBlogsByAccount()">Bài viết của bạn</a></li>
                 <li class="dropdown"><a href="#"><span>Danh mục</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
+                    <ul id="L_category">
                         <li><a href="#">Drop Down 1</a></li>
                         <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
                             <ul>
@@ -84,7 +89,11 @@
                 </li>
                 <li><a class="nav-link scrollto" href="#contact">Liên hệ</a></li>
                 <li style="margin-left:30px ">
-                    <input type="text" class="input-group" placeholder="Tìm kiếm"></li>
+                    <form>
+                        <input id="tim_kiem" type="text" class="input-group" placeholder="Tìm kiếm">
+                        <input type="submit" onclick="searchByTitle()" href="#blogs">
+                    </form>
+                </li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
@@ -116,6 +125,18 @@
     </div>
 
 </section><!-- End Hero -->
+
+<section id="blogs" class="team section-bg">
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            <h2>Danh sách blog</h2>
+        </div>
+
+        <div class="row" id="list_blog"></div>
+
+    </div>
+</section><!-- End danh sách blog  -->
 
 <main id="main">
     <!-- create blog -->
