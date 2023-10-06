@@ -1,3 +1,9 @@
+function logInAddMin(id_addMin) {
+    localStorage.setItem("id_addMin", id_addMin);
+    window.location.href = "home-user2.html";
+}
+
+
 function showListCategory() {
     $.ajax({
         type: "GET",
@@ -62,7 +68,9 @@ function blogs(data) {
         "                <span>" + data.date + "</span>\n" +
         "                <span>" + data.category.name + "</span>\n" +
         "                <div class=\"social\">" +
-        "                   <button  style='width: 100px; border-radius: 20px; background-color: #6791cd' onclick='showBlog(" + data.id + ")'>Xem chi tiết</button>" +
+        "                  <button  style='width: 100px; border-radius: 20px; background-color: #6791cd' onclick='showBlog(" + data.id + ")'>Xem chi tiết</button>" +
+        "                  <button  style='width: 100px; border-radius: 20px; background-color: #6791cd' onclick='update(" + data.id + ")'>Update</button>" +
+        "                  <button  style='width: 100px; border-radius: 20px; background-color: #6791cd' onclick='deleteBlog(" + data.id + ")'>Delete</button>" +
         "                </div>\n" +
         "              </div>" +
         "              </div>" +
@@ -70,10 +78,11 @@ function blogs(data) {
 }
 
 function disPlayBlogsByAccount() {
-    let id_account = localStorage.getItem("id_account");
+    let id_account = localStorage.getItem("id_addMin");
+    console.log(id_account);
     $.ajax({
         type: "GET",
-        url: "http://localhost:8080/api/blog/display/" + 2,
+        url: "http://localhost:8080/api/blog/display/" + id_account,
         success: function (data) {
             console.log("x= " + data)
             let content = "";
