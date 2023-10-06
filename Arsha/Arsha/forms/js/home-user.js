@@ -2,8 +2,17 @@ function loadHomeUser() {
     showListCategory_user();
     fillAccountInformation();
     loadCategory();
-    blogOfAccount();
     allBlog();
+    let id = localStorage.getItem("id-account");
+    $.ajax({
+        url: "http://localhost:8080/api/blog2/findBlogByAccount/" + id,
+        type: "GET",
+        success: function (blogs) {
+            if (blogs.length > 0) {
+                blogOfAccount();
+            }
+        }
+    })
     event.preventDefault()
 }
 
@@ -78,6 +87,7 @@ function createNewBlog() {
             alert("Thêm bài viết thành công!")
             document.getElementById("form-create-blog").reset()
             blogOfAccount()
+            allBlog()
             document.getElementById("blog-account").scrollIntoView({behavior: "smooth"})
         }
     })
@@ -148,9 +158,11 @@ function blogOfAccount() {
     })
     event.preventDefault()
 }
+
 function editBlog(id_blog) {
     updateUser(id_blog);
 }
+
 function allBlog() {
     $.ajax({
         url: "http://localhost:8080/api/blog2/findAllBlog",
@@ -210,6 +222,7 @@ function allBlog() {
     })
     event.preventDefault()
 }
+
 function detailsBlog(id_blog) {
     $.ajax({
         url: "http://localhost:8080/api/blog2/findById/" + id_blog,
@@ -221,6 +234,7 @@ function detailsBlog(id_blog) {
     })
     event.preventDefault()
 }
+
 function fillAllCommentOfBlog2(id) {
     $.ajax({
         url: "http://localhost:8080/api/comment/findAllCommentOfBlog/" + id,
@@ -247,6 +261,7 @@ function fillAllCommentOfBlog2(id) {
     })
     event.preventDefault()
 }
+
 function fillAllCommentOfBlog1(id) {
     $.ajax({
         url: "http://localhost:8080/api/comment/findAllCommentOfBlog/" + id,
@@ -273,6 +288,7 @@ function fillAllCommentOfBlog1(id) {
     })
     event.preventDefault()
 }
+
 function commentBlog2(id) {
     let content = $(`#content-comment-blog-${id}-2`).val()
     if (content === "") {
@@ -347,17 +363,22 @@ function displayLike2(id_blog) {
             for (let i = 0; i < likes.length; i++) {
                 if (likes[i].account.id == id_account && likes[i].blog.id == id_blog) {
                     // document.getElementById(`like-blog-of-account-${id_blog}`).style.color = "red";
+                    // nếu người dùng đã like thì hiển thị nút like thành màu đỏ:
                     document.getElementById(`like-blog-of-account-${id_blog}-2`).style.color = "red";
                 }
                 if (likes[i].blog.id == id_blog) {
                     number_like++;
                 }
             }
-            // document.getElementById(`number-like-${id_blog}-1`).innerHTML = `${number_like}`
+            let a = document.getElementById(`number-like-${id_blog}-1`);
+            if (a !== null) {
+                document.getElementById(`number-like-${id_blog}-1`).innerHTML = `${number_like}`
+            }
             document.getElementById(`number-like-${id_blog}-2`).innerHTML = `${number_like}`
         }
     })
 }
+
 function displayLike1(id_blog) {
     let id_account = localStorage.getItem("id-account");
     $.ajax({
@@ -374,8 +395,11 @@ function displayLike1(id_blog) {
                     number_like++;
                 }
             }
-            document.getElementById(`number-like-${id_blog}-1`).innerHTML = `${number_like}`
-            // document.getElementById(`number-like-${id_blog}-2`).innerHTML = `${number_like}`
+            let a = document.getElementById(`number-like-${id_blog}-1`);
+            if (a !== null) {
+                document.getElementById(`number-like-${id_blog}-1`).innerHTML = `${number_like}`
+            }
+            document.getElementById(`number-like-${id_blog}-2`).innerHTML = `${number_like}`
         }
     })
 }
@@ -401,8 +425,9 @@ function likeBlog(id) {
             data: JSON.stringify(like),
             success: function () {
                 document.getElementById(`like-blog-of-account-${id}`).style.color = "blue";
-                // document.getElementById(`like-blog-of-account-${id}-2`).style.color = "blue";
+                document.getElementById(`like-blog-of-account-${id}-2`).style.color = "blue";
                 displayLike1(id)
+                // displayLike2(id)
             }
         })
     } else {
@@ -424,7 +449,9 @@ function likeBlog(id) {
             data: JSON.stringify(like),
             success: function () {
                 document.getElementById(`like-blog-of-account-${id}`).style.color = "red";
+                document.getElementById(`like-blog-of-account-${id}-2`).style.color = "red";
                 displayLike1(id)
+                // displayLike2(id)
             }
         })
     }
@@ -452,8 +479,12 @@ function likeBlog2(id) {
             data: JSON.stringify(like),
             success: function () {
                 document.getElementById(`like-blog-of-account-${id}-2`).style.color = "blue";
-                // document.getElementById(`like-blog-of-account-${id}`).style.color = "blue";
+                let a = document.getElementById(`like-blog-of-account-${id}`);
+                if (a !== null) {
+                    document.getElementById(`like-blog-of-account-${id}`).style.color = "blue";
+                }
                 displayLike2(id)
+                // displayLike1(id)
             }
         })
     } else {
@@ -475,8 +506,12 @@ function likeBlog2(id) {
             data: JSON.stringify(like),
             success: function () {
                 document.getElementById(`like-blog-of-account-${id}-2`).style.color = "red";
-                // document.getElementById(`like-blog-of-account-${id}`).style.color = "red";
+                let a = document.getElementById(`like-blog-of-account-${id}`);
+                if (a !== null) {
+                    document.getElementById(`like-blog-of-account-${id}`).style.color = "blue";
+                }
                 displayLike2(id)
+                // displayLike1(id)
             }
         })
     }
@@ -502,66 +537,67 @@ function showListCategory_user() {
 
 }
 
-function searchByCategory_user(id_category) {
-
-    $.ajax({
-        type: "GET",
-        url: "http://localhost:8080/api/blog/search_by_category/" + id_category,
-        success: function (blogs) {
-            if (blogs.length > 0) {
-                let content = ""
-                for (let i = 0; i < blogs.length; i++) {
-                    content += ` <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="0" id="xxx-xxx">
-                    <div class="member d-flex align-items-start">
-                  
-                        <div class="member-info" style="">
-                         <div class="social">
-                         <a onclick="editBlog(${blogs[i].id})"><i class="ri-settings-3-fill"></i></a>
-                           </div>
-                            <h6>Tiêu đề: ${blogs[i].title}</h6>
-                            <p style="margin-bottom: 10px">Ngày đăng: ${blogs[i].date}</p>`;
-                    if (blogs[i].url_img) {
-                        content += `<img src="/src/main/resources/static/img/${blogs[i].url_img}" id="blogImage" alt="" style="width: 325px; height: 200px">`
-                    }
-                    content += `
-                            <h6 style="text-align: justify; width: 325px; margin-top: 10px" id="content-blog-of-account">${blogs[i].content}</h6>`
-                    if (blogs[i].content.length > 100) {
-                        content += `<a href="">Xem thêm</a>`
-                    }
-
-
-                    content +=
-                        `<hr>
-                            <div class="social">
-                            <a href="#" onclick="likeBlog(${blogs[i].id})"> <i class="ri-user-heart-line" id="like-blog-of-account-${blogs[i].id}" style="color: blue"></i></a>
-                           <span id="number-like-${blogs[i].id}-1"></span>
-                             </div>
-                             
-                            <span id="all-comment-of-blog-${blogs[i].id}"></span>
-                             <textarea style="margin-top: 5px" class="form-control" name="message" rows="2" id="content-comment-blog-${blogs[i].id}" placeholder="Bình luận" required></textarea>
-                             <a href="#" onclick="commentBlog(${blogs[i].id})">Bình luận</a>
-                            <hr>
-                            <div class="social">
-                                <a href=""><i class="ri-twitter-fill"></i></a>
-                                <a href=""><i class="ri-facebook-fill"></i></a>
-                                <a href=""><i class="ri-instagram-fill"></i></a>
-                                <a href=""> <i class="ri-linkedin-box-fill"></i></a>
-                            </div>
-                        </div>
-                    </div></div>`;
-
-                }
-                for (let i = 0; i < blogs.length; i++) {
-                    fillAllCommentOfBlog1(blogs[i].id)
-                }
-                for (let i = 0; i < blogs.length; i++) {
-                    displayLike1(blogs[i].id)
-                }
-                document.getElementById("blogs_by_category").innerHTML = content;
-            }
-            if (blogs.length === 0) {
-                document.getElementById("blogs_by_category").innerHTML = "<p style='text-align: center'>Bạn chưa có bài viết nào!</p>";
-            }
-        }
-    })
-}
+//
+// function searchByCategory_user(id_category) {
+//
+//     $.ajax({
+//         type: "GET",
+//         url: "http://localhost:8080/api/blog/search_by_category/" + id_category,
+//         success: function (blogs) {
+//             if (blogs.length > 0) {
+//                 let content = ""
+//                 for (let i = 0; i < blogs.length; i++) {
+//                     content += ` <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="0" id="xxx-xxx">
+//                     <div class="member d-flex align-items-start">
+//
+//                         <div class="member-info" style="">
+//                          <div class="social">
+//                          <a onclick="editBlog(${blogs[i].id})"><i class="ri-settings-3-fill"></i></a>
+//                            </div>
+//                             <h6>Tiêu đề: ${blogs[i].title}</h6>
+//                             <p style="margin-bottom: 10px">Ngày đăng: ${blogs[i].date}</p>`;
+//                     if (blogs[i].url_img) {
+//                         content += `<img src="/src/main/resources/static/img/${blogs[i].url_img}" id="blogImage" alt="" style="width: 325px; height: 200px">`
+//                     }
+//                     content += `
+//                             <h6 style="text-align: justify; width: 325px; margin-top: 10px" id="content-blog-of-account">${blogs[i].content}</h6>`
+//                     if (blogs[i].content.length > 100) {
+//                         content += `<a href="">Xem thêm</a>`
+//                     }
+//
+//
+//                     content +=
+//                         `<hr>
+//                             <div class="social">
+//                             <a href="#" onclick="likeBlog(${blogs[i].id})"> <i class="ri-user-heart-line" id="like-blog-of-account-${blogs[i].id}" style="color: blue"></i></a>
+//                            <span id="number-like-${blogs[i].id}-1"></span>
+//                              </div>
+//
+//                             <span id="all-comment-of-blog-${blogs[i].id}"></span>
+//                              <textarea style="margin-top: 5px" class="form-control" name="message" rows="2" id="content-comment-blog-${blogs[i].id}" placeholder="Bình luận" required></textarea>
+//                              <a href="#" onclick="commentBlog(${blogs[i].id})">Bình luận</a>
+//                             <hr>
+//                             <div class="social">
+//                                 <a href=""><i class="ri-twitter-fill"></i></a>
+//                                 <a href=""><i class="ri-facebook-fill"></i></a>
+//                                 <a href=""><i class="ri-instagram-fill"></i></a>
+//                                 <a href=""> <i class="ri-linkedin-box-fill"></i></a>
+//                             </div>
+//                         </div>
+//                     </div></div>`;
+//
+//                 }
+//                 for (let i = 0; i < blogs.length; i++) {
+//                     fillAllCommentOfBlog1(blogs[i].id)
+//                 }
+//                 for (let i = 0; i < blogs.length; i++) {
+//                     displayLike1(blogs[i].id)
+//                 }
+//                 document.getElementById("blogs_by_category").innerHTML = content;
+//             }
+//             if (blogs.length === 0) {
+//                 document.getElementById("blogs_by_category").innerHTML = "<p style='text-align: center'>Bạn chưa có bài viết nào!</p>";
+//             }
+//         }
+//     })
+// }
