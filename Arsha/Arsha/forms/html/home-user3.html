@@ -39,6 +39,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="../js/update_blog_of_user.js"></script>
     <script src="../js/home-user.js"></script>
     <style>
         #content-blog-of-account {
@@ -48,6 +49,8 @@
             overflow: hidden;
         }
     </style>
+
+
 </head>
 
 <body onload="loadHomeUser()">
@@ -66,7 +69,7 @@
                 <li><a class="nav-link scrollto" href="#about">Tài khoản</a></li>
                 <li><a class="nav-link scrollto" href="#blog-account">Bài viết của bạn</a></li>
                 <li class="dropdown"><a href="#"><span>Danh mục</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
+                    <ul id="L_category">
                         <li><a href="#">Drop Down 2</a></li>
                         <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
                             <ul>
@@ -215,6 +218,19 @@
         </div>
     </section>
     <!-- Hết hiển thị tất cả bài viết -->
+    <!-- =======hiển thị theo category ======= -->
+    <section id="blogs_C" class="team section-bg">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>Danh sách blog Theo loại đã chọn</h2>
+            </div>
+            <div class="row" id="blogs_by_category" >
+            </div>
+
+        </div>
+    </section>
+    <!-- Kết thúc phần Hết hiển thị tất cả bài viết -->
 
     <!-- ======= Contact Section ======= -->
 
