@@ -5,6 +5,7 @@ import com.example.case_study_module4.repository.IRoleRepository;
 import com.example.case_study_module4.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +19,8 @@ public class RoleService implements IRoleService {
     }
 
     @Override
-    public Page<Role> findAll() {
-        return null;
+    public Page<Role> findAll(Pageable pageable) {
+        return roleRepository.findAll(pageable);
     }
 
     @Override

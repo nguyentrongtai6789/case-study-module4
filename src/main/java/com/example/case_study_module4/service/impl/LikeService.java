@@ -5,6 +5,7 @@ import com.example.case_study_module4.repository.ILikeRepository;
 import com.example.case_study_module4.service.ILikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,8 +20,8 @@ public class LikeService implements ILikeService {
     }
 
     @Override
-    public Page<Like> findAll() {
-        return null;
+    public Page<Like> findAll(Pageable pageable) {
+        return likeRepository.findAll(pageable);
     }
 
     @Override

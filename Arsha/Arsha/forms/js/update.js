@@ -53,12 +53,12 @@ function updateNewBlog() {
         account: account,
         category: category
     }
-    let formData =new FormData();
+    let formData = new FormData();
         formData.append("blog", new Blob([JSON.stringify(blog)], {type: 'application/json'}));
         formData.append("file", file)
     $.ajax({
-        type: "http://localhost:8080/api/blog/update" + id_account+ "/" + id_category,
-        url: "http://localhost:8080/api/blog/update",
+        type: "POST",
+        url: "http://localhost:8080/api/blog/update/" + id_account + id_category,
         success: function (){
             alert("Sửa thành công");
         }

@@ -5,6 +5,7 @@ import com.example.case_study_module4.repository.ICommentRepository;
 import com.example.case_study_module4.service.ICommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +19,8 @@ public class CommentService implements ICommentService {
     }
 
     @Override
-    public Page<Comment> findAll() {
-        return null;
+    public Page<Comment> findAll(Pageable pageable) {
+        return commentRepository.findAll(pageable);
     }
 
     @Override

@@ -9,6 +9,8 @@ import com.example.case_study_module4.service.IBlogService;
 import com.example.case_study_module4.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.FileCopyUtils;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @RestController
@@ -32,16 +35,44 @@ public class BlogController {
     @Value("${upload.path}")
     private String upload;
 
+    @GetMapping("/pageBlog")
+    public ResponseEntity<Page<Blog>> getPageBlog(Pageable pageable) {
+        return new ResponseEntity<>(iBlogService.findAll(pageable), HttpStatus.OK);
+    }
+
     @GetMapping("/update/{id}")
-    public ResponseEntity<Blog> findOne(@PathVariable("id_blog") Long id){
+    public ResponseEntity<Blog> findOne(@PathVariable("id_blog") Long id) {
         return new ResponseEntity<>(iBlogService.findById(id), HttpStatus.OK);
+    }
+
+    //    @PostMapping("/createBlog")
+//    public ResponseEntity<?> createBlog(@RequestPart Blog blog,
+//                                        @RequestPart(value = "file", required = false) MultipartFile file) {
+//        blog.setDate(LocalDate.now());
+//        getImagePath(blog, file);
+//        iBlogService.save(blog);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
+
+    @PostMapping("/create/{id_account}/{id_category}")
+    public ResponseEntity<?> create(@RequestPart("blog") Blog new_blog,
+                                    @PathVariable("id_account") Long id_account,
+                                    @PathVariable("id_category") Long id_categoty,
+                                    @RequestPart(value = "file", required = false) MultipartFile file) {
+        getImagePath(new_blog, file);
+        Account account = iAccountService.findOneAccountById(id_account);
+        Category category = iCategoryService.findById(id_categoty);
+        new_blog.setCategory(category);
+        new_blog.setAccount(account);
+        new_blog.setDate(LocalDate.now());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/update/{id_account}/{id_category}")
     public ResponseEntity<?> update(@RequestPart("blog") Blog new_Blog,
                                     @PathVariable("id_account") Long id_account,
                                     @PathVariable("id_category") Long id_category,
-                                    @RequestPart(value = "file", required = false) MultipartFile file){
+                                    @RequestPart(value = "file", required = false) MultipartFile file) {
         getImagePath(new_Blog, file);
         Account account = iAccountService.findOneAccountById(id_account);
         Category category = iCategoryService.findById(id_category);
@@ -49,6 +80,7 @@ public class BlogController {
         new_Blog.setAccount(account);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     private void getImagePath(Blog blog, MultipartFile file) {
         if (file.getSize() == 0) {
             if (Objects.equals(blog.getId(), null)) {
@@ -61,7 +93,7 @@ public class BlogController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-           blog.setUrl_img(name);
+            blog.setUrl_img(name);
         }
     }
 }

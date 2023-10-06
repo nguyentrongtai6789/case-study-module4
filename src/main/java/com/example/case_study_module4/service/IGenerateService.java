@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IGenerateService <E>{
     List<E> findALl();
-    Page<E> findAll();
+    Page<E> findAll(Pageable pageable);
     void save(E e);
     E findById(Long id);
     void deleteById(Long id);
