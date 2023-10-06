@@ -28,7 +28,7 @@ function login() {
             }
             if (check) {
                 // nếu là admin chuyển về trang của admin
-                logInAddMin(data.id);
+                window.location.href = "home-user2.html";
             } else {
             // nếu là trang user chuyển về trang user
                 window.location.href = "home-user3.html"
