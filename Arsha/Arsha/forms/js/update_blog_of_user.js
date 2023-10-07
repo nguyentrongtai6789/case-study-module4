@@ -4,6 +4,10 @@ function updateUser(id_blog) {
 }
 function showCategory() {
     $.ajax({
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }, // phải có cái headers này chú ý!!!!
         type: "GET",
         url: "http://localhost:8080/api/category",
         success:function (data){
@@ -21,9 +25,15 @@ function showCategory() {
 }
 function updateBlog() {
     let id_blog = +localStorage.getItem("id_blog");
+    let a = localStorage.getItem("token");
+    console.log(a)
     console.log(id_blog);
     showCategory();
     $.ajax({
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }, // phải có cái headers này chú ý!!!!
         type: "GET",
         url: "http://localhost:8080/api/blog/update/" + id_blog,
         success: function (data){
@@ -72,6 +82,10 @@ function updateNewBlog() {
         formData.append("file", file)
     console.log(formData)
     $.ajax({
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }, // phải có cái headers này chú ý!!!!
         url: "http://localhost:8080/api/blog/update/" + id_account+ "/" + id_category,
         type: "POST",
         processData: false,

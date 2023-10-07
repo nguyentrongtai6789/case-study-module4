@@ -2,6 +2,10 @@ function findAllAccount() {
     let name = localStorage.getItem("account-name");
     document.getElementById("account-name-display").innerHTML = name;
     $.ajax({
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }, // phải có cái headers này chú ý!!!!
         url: "http://localhost:8080/api/findAllAccounts",
         type: "GET",
         success: function (accounts) {
@@ -72,6 +76,10 @@ function saveRoleEdit(id) {
     let a = confirm("Bạn có chắc chắn muốn cấp quyền admin cho tài khoản này?")
     if (a) {
         $.ajax({
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }, // phải có cái headers này chú ý!!!!
             url: "http://localhost:8080/api/saveNewRole/" + id,
             type: "POST",
             success: function () {
@@ -109,7 +117,10 @@ function deleteAccount(idDelete) {
             alert("Không thể xoá tài khoản admin!")
         } else {
             $.ajax({
-
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                }, // phải có cái headers này chú ý!!!!
                 url: "http://localhost:8080/api/deleteAccount/" + idDelete,
                 type: "DELETE",
                 success: function () {
