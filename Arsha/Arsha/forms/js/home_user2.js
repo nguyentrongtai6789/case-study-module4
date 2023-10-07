@@ -24,7 +24,6 @@ function showListCategory() {
 
     $.ajax({
         headers: {
-            "Content-Type": "application/json",
             "Authorization": "Bearer " + localStorage.getItem("token")
         }, // phải có cái headers này chú ý!!!!
         type: "GET",
@@ -44,7 +43,6 @@ function searchByCategory(id_category) {
 
     $.ajax({
         headers: {
-            "Content-Type": "application/json",
             "Authorization": "Bearer " + localStorage.getItem("token")
         }, // phải có cái headers này chú ý!!!!
         type: "GET",
@@ -64,7 +62,6 @@ function searchByCategory(id_category) {
 function disPlayBlogs() {
     $.ajax({
         headers: {
-            "Content-Type": "application/json",
             "Authorization": "Bearer " + localStorage.getItem("token")
         }, // phải có cái headers này chú ý!!!!
         type: "Get",
@@ -107,7 +104,6 @@ function disPlayBlogsByAccount() {
     console.log(id_account);
     $.ajax({
         headers: {
-            "Content-Type": "application/json",
             "Authorization": "Bearer " + localStorage.getItem("token")
         }, // phải có cái headers này chú ý!!!!
         type: "GET",
@@ -147,7 +143,6 @@ function deleteBlog(id_blog) {
     console.log("blabla" + id_blog);
     $.ajax({
         headers: {
-            "Content-Type": "application/json",
             "Authorization": "Bearer " + localStorage.getItem("token")
         }, // phải có cái headers này chú ý!!!!
         type: "GET",
@@ -162,7 +157,6 @@ function searchByTitle() {
     let title = document.getElementById("tim_kiem").value;
     $.ajax({
         headers: {
-            "Content-Type": "application/json",
             "Authorization": "Bearer " + localStorage.getItem("token")
         }, // phải có cái headers này chú ý!!!!
         type: "GET",
