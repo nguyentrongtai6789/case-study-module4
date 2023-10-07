@@ -4,6 +4,9 @@ function update(id_blog) {
 }
 function showCategory() {
     $.ajax({
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }, // phải có cái headers này chú ý!!!!
         type: "GET",
         url: "http://localhost:8080/api/category",
         success:function (data){
@@ -24,6 +27,9 @@ function updateBlog() {
     console.log(id_blog);
     showCategory();
     $.ajax({
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }, // phải có cái headers này chú ý!!!!
         type: "GET",
         url: "http://localhost:8080/api/blog/update/" + id_blog,
         success: function (data){
