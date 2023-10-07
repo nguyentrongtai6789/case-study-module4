@@ -92,7 +92,8 @@ function passwordRetrieval() {
     console.log(account)
     $.ajax({
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
         }, // phải có cái headers này chú ý!!!!
         url: "http://localhost:8080/api/changePassword",
         type: "POST",
