@@ -1,6 +1,4 @@
 
-
-
 function showListCategory() {
     $.ajax({
         type: "GET",
