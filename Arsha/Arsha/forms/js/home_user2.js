@@ -3,6 +3,10 @@
 
 function showListCategory() {
     $.ajax({
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }, // phải có cái headers này chú ý!!!!
         type: "GET",
         url: "http://localhost:8080/api/category",
         success: function (data) {
@@ -21,6 +25,10 @@ function showListCategory() {
     let name_addMin = localStorage.getItem("account-name");
 
     $.ajax({
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }, // phải có cái headers này chú ý!!!!
         type: "GET",
         url: "http://localhost:8080/api/searchAccountByName/" + name_addMin,
         success: function (data) {
@@ -37,6 +45,10 @@ function showListCategory() {
 function searchByCategory(id_category) {
 
     $.ajax({
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }, // phải có cái headers này chú ý!!!!
         type: "GET",
         url: "http://localhost:8080/api/blog/search_by_category/" + id_category,
         success: function (data){
@@ -53,6 +65,10 @@ function searchByCategory(id_category) {
 
 function disPlayBlogs() {
     $.ajax({
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }, // phải có cái headers này chú ý!!!!
         type: "Get",
         url: "http://localhost:8080/api/blog",
         success: function (data) {
@@ -92,6 +108,10 @@ function disPlayBlogsByAccount() {
     let id_account = localStorage.getItem("id_addMin");
     console.log(id_account);
     $.ajax({
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }, // phải có cái headers này chú ý!!!!
         type: "GET",
         url: "http://localhost:8080/api/blog/display/" + id_account,
         success: function (data) {
@@ -128,6 +148,10 @@ function blogByAccount(data) {
 function deleteBlog(id_blog) {
     console.log("blabla" + id_blog);
     $.ajax({
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }, // phải có cái headers này chú ý!!!!
         type: "GET",
         url: "http://localhost:8080/api/blog/delete/" + id_blog,
         success: function () {
@@ -139,6 +163,10 @@ function deleteBlog(id_blog) {
 function searchByTitle() {
     let title = document.getElementById("tim_kiem").value;
     $.ajax({
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }, // phải có cái headers này chú ý!!!!
         type: "GET",
         url:"http://localhost:8080/api/blog/search_by_title/" + title,
         success: function (data) {
