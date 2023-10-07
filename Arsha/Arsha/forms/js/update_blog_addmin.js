@@ -72,6 +72,9 @@ function updateNewBlog() {
         formData.append("file", file)
     console.log(formData)
     $.ajax({
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }, // phải có cái headers này chú ý!!!!
         url: "http://localhost:8080/api/blog/update/" + id_account+ "/" + id_category,
         type: "POST",
         processData: false,
