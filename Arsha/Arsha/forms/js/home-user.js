@@ -562,6 +562,7 @@ function likeBlog2(id) {
 function showListCategory_user() {
     $.ajax({
         headers: {
+            "Content-Type": "application/json",
             "Authorization": "Bearer " + localStorage.getItem("token")
         }, // phải có cái headers này chú ý!!!!
         type: "GET",
@@ -588,6 +589,10 @@ function clearLocalStorage() {
 // function searchByCategory_user(id_category) {
 //
 //     $.ajax({
+//         headers: {
+//             "Content-Type": "application/json",
+//             "Authorization": "Bearer " + localStorage.getItem("token")
+//         }, // phải có cái headers này chú ý!!!!
 //         type: "GET",
 //         url: "http://localhost:8080/api/blog/search_by_category/" + id_category,
 //         success: function (blogs) {
