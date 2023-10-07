@@ -7,6 +7,9 @@ function showBlog_A() {
     let id_blog = localStorage.getItem("id_blog_a");
     console.log("id= " +id_blog)
 $.ajax({
+    headers: {
+        "Authorization": "Bearer " + localStorage.getItem("token")
+    }, // phải có cái headers này chú ý!!!!
     type: "GET",
     url:"http://localhost:8080/api/blog/displayoneblog/" + id_blog,
     success: function (data){
