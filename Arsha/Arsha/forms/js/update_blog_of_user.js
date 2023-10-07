@@ -83,7 +83,6 @@ function updateNewBlog() {
     console.log(formData)
     $.ajax({
         headers: {
-            "Content-Type": "application/json",
             "Authorization": "Bearer " + localStorage.getItem("token")
         }, // phải có cái headers này chú ý!!!!
         url: "http://localhost:8080/api/blog/update/" + id_account+ "/" + id_category,
