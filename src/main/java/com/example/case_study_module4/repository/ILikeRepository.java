@@ -9,14 +9,15 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+@Transactional
 @Repository
 public interface ILikeRepository extends JpaRepository<Like, Long> {
-    @Transactional
+
     @Modifying
     @Query(value = "delete from likes where id_account = ?1 and id_blog = ?2", nativeQuery = true)
     void deleteByAccountAndBlog(Long id_account, Long id_blog);
 
+    @Modifying
     @Query(value = "delete from likes where id_blog = ?", nativeQuery = true)
     void deleteLikeByIdBlog(Long id_blog);
 }
