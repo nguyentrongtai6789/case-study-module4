@@ -13,6 +13,8 @@ function login() {
         type: "POST",
         data: JSON.stringify(account),
         success: function (data) {
+            console.log("Login successful with token: ");
+            // alert("tok: " + data.token);
             localStorage.setItem("token", data.token); // lưu token
             localStorage.setItem("account-name", data.username) // lưu tên nguời dùng
             localStorage.setItem("id-account", data.id)
@@ -28,7 +30,9 @@ function login() {
             }
             if (check) {
                 // nếu là admin chuyển về trang của admin
-                window.location.href = "home-user2.html";
+                let token = localStorage.getItem("token");
+                let role = localStorage.getItem("roles")
+               logInAmin(token, role);
             } else {
             // nếu là trang user chuyển về trang user
                 window.location.href = "home-user3.html"

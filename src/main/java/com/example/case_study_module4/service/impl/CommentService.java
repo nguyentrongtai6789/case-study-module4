@@ -21,6 +21,13 @@ public class CommentService implements ICommentService {
     }
 
     @Override
+    public void deleteCommentByIdBlog(Long id_blog) {
+        if (id_blog != null){
+            commentRepository.deleteByIdBlog(id_blog);
+        }
+    }
+
+    @Override
     public List<Comment> findByAccountId(Long id) {
         return commentRepository.findByAccountId(id);
     }

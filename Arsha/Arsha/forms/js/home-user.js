@@ -121,7 +121,6 @@ function blogOfAccount() {
                 for (let i = 0; i < blogs.length; i++) {
                     content += ` <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="0" id="xxx-xxx">
                     <div class="member d-flex align-items-start">
-                  
                         <div class="member-info" style="">
                          <div class="social">
                          <a onclick="editBlog(${blogs[i].id})"><i class="ri-settings-3-fill"></i></a>

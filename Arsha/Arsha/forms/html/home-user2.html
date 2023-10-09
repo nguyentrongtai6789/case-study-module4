@@ -65,6 +65,9 @@
 </head>
 
 <body onload="showListCategory()">
+<script>
+    // alert("token:" + localStorage.getItem("token"));
+</script>
 
 <!-- ======= Header ======= -->
 <header id="header" class="fixed-top ">
@@ -76,15 +79,17 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a class="nav-link scrollto active" href="#blogs" onclick="disPlayBlogs()">Danh sách bài viết</a></li>
+                <li><a class="nav-link scrollto active" href="#blogs" onclick="disPlayBlogs()">Danh sách bài viết</a>
+                </li>
                 <li><a class="nav-link scrollto active" href="#contact">Tạo bài viết mới</a></li>
                 <li><a class="nav-link scrollto" href="#about">Tài khoản</a></li>
-                <li><a class="nav-link scrollto" href="#team" onclick="disPlayBlogsByAccount()">Bài viết của bạn</a></li>
+                <li><a class="nav-link scrollto" href="#team" onclick="disPlayBlogsByAccount()">Bài viết của bạn</a>
+                </li>
                 <li class="dropdown"><a href="#"><span>Danh mục</span> <i class="bi bi-chevron-down"></i></a>
                     <ul id="L_category">
                         <li><a href="#">Drop Down 1</a></li>
                         <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                            <ul >
+                            <ul>
                                 <li><a href="#">Deep Drop Down 1</a></li>
                                 <li><a href="#">Deep Drop Down 2</a></li>
                                 <li><a href="#">Deep Drop Down 3</a></li>
@@ -97,12 +102,14 @@
                         <li><a href="#">Drop Down 4</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-link scrollto" href="admin-page.html" >D/S người dùng</a></li>
+                <li><a class="nav-link scrollto" href="admin-page.html">D/S người dùng</a></li>
                 <li style="margin-left:30px ">
                     <form>
                         <div style="display:flex;">
-                            <input style="border-radius: 20px" id="tim_kiem" type="text" class="input-group" placeholder="Tìm kiếm">
-                            <input style="margin-left: 5px; border-radius: 20px" value="Tìm kiếm" type="submit" onclick="searchByTitle()" href="#blogs">
+                            <input style="border-radius: 20px" id="tim_kiem" type="text" class="input-group"
+                                   placeholder="Tìm kiếm">
+                            <input style="margin-left: 5px; border-radius: 20px" value="Tìm kiếm" type="submit"
+                                   onclick="searchByTitle()">
                         </div>
                     </form>
                 </li>
@@ -133,7 +140,8 @@
                 </div>
             </div>
             <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
-                <img src="../../../../src/main/resources/static/img/90129230_2800082376724617_6512435430338592768_n.jpg" class="img-fluid animated" alt="">
+                <img src="../../../../src/main/resources/static/img/90129230_2800082376724617_6512435430338592768_n.jpg"
+                     class="img-fluid animated" alt="">
             </div>
         </div>
     </div>
@@ -157,41 +165,75 @@
 <main id="main">
 
     <section id="contact" class="contact">
-        <div class="container" data-aos="fade-up" style="text-align: center; align-items: center">
+        <div class="container" data-aos="fade-up">
 
             <div class="section-title">
-                <h2>Tạo bài viết mới</h2>
+                <h2>Tạo bài viết mới</h2>
+                <p>Bạn có thực sự muốn sửa đổi thông tin bài viết của mình</p>
             </div>
 
-            <div class="row" style="display: flex; justify-content: center; align-items: center">
+            <div class="row">
+
+                <div class="col-lg-5 d-flex align-items-stretch">
+                    <div class="info">
+                        <div class="address">
+                            <i class="bi bi-geo-alt"></i>
+                            <h4>Location:</h4>
+                            <p>A108 Adam Street, New York, NY 535022</p>
+                        </div>
+
+                        <div class="email">
+                            <i class="bi bi-envelope"></i>
+                            <h4>Email:</h4>
+                            <p>info@example.com</p>
+                        </div>
+
+                        <div class="phone">
+                            <i class="bi bi-phone"></i>
+                            <h4>Call:</h4>
+                            <p>+1 5589 55488 55s</p>
+                        </div>
+
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
+                    </div>
+
+                </div>
+
                 <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-                    <form action="forms/contact.php" method="post" role="form" class="php-email-form" style="text-align: center;">
+                    <form action="forms/contact.php" method="post" role="form" class="php-email-form">
                         <div class="row">
-                            <div class="form-group" style="text-align: center;">
-                                <span>Tiêu đề của bài viết:</span>
-                                <input type="text" class="form-control" id="title-create">
+                            <div class="form-group col-md-6">
+                                <div class="form-group">
+                                    <label for="account">Account</label>
+                                    <input type="text" class="form-control" name="subject" id="account" readonly>
+                                </div>
+                                <label for="category_C">Loại blog</label>
+                                <select id="category_C" name="category"></select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="date">Ngày đăng</label>
+                                <input type="date" class="form-control" name="email" id="date" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <span>Lựa chọn danh mục của bài viết:</span>
-                            <span id="category-create"></span>
+                            <label for="title_C">Tiêu đề</label>
+                            <input type="text" class="form-control" name="subject" id="title_C" required>
                         </div>
                         <div class="form-group">
-                            <span>Chọn ảnh bài viết:</span>
-                            <input type="file" id="image-create">
+                            <label for="img">Chọn ảnh</label>
+                            <br>
+                            <input type="file" id="img"   >
                         </div>
                         <div class="form-group">
-                            <span>Nhập nội dung của bài viết:</span>
-                            <textarea class="form-control" name="message" rows="10" required></textarea>
+                            <label for="content">Nội dung</label>
+                            <textarea class="form-control" name="message" rows="10" id="content"></textarea>
                         </div>
                         <div class="my-3">
                             <div class="loading">Loading</div>
                             <div class="error-message"></div>
                             <div class="sent-message">Your message has been sent. Thank you!</div>
                         </div>
-                        <div class="text-center">
-                            <button type="submit">Send Message</button>
-                        </div>
+                        <div class="text-center"><button type="button" onclick="createBlog()">Create</button></div>
                     </form>
                 </div>
 
@@ -217,8 +259,8 @@
                 <div class="col-lg-6 pt-4 pt-lg-0" style="text-align: center">
                     <a href="form-change-password.html" target="_blank" class="btn-learn-more" style="width: 200px">Đổi
                         mật khẩu</a><br>
-<!--                    <span id="information-to-change-password"></span>-->
-<!--                    <a href="form-login.html" class="btn-learn-more" style="width: 200px">Đăng xuất</a>-->
+                    <!--                    <span id="information-to-change-password"></span>-->
+                    <!--                    <a href="form-login.html" class="btn-learn-more" style="width: 200px">Đăng xuất</a>-->
                 </div>
             </div>
         </div>

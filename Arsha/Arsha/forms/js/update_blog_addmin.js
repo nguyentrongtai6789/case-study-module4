@@ -45,8 +45,7 @@ function updateBlog() {
 }
 function updateNewBlog() {
     let id_blog = +localStorage.getItem("id_blog");
-    console.log("line4")
-    console.log(id_blog);
+
     let title = document.getElementById("title").value;
     let content = document.getElementById("content").value;
     let url_img = null;
@@ -61,7 +60,7 @@ function updateNewBlog() {
         file = new File([], "", undefined)
         url_img = localStorage.getItem("image_path")
     }
-    console.log("id category =" + id_category)
+
     let blog = {
         id: id_blog,
         title: title,
@@ -71,8 +70,7 @@ function updateNewBlog() {
         account: account,
         category: category
     }
-    console.log("line3")
-    console.log(blog)
+
     let formData = new FormData();
         formData.append("blog", new Blob([JSON.stringify(blog)], {type: 'application/json'}));
         formData.append("file", file)

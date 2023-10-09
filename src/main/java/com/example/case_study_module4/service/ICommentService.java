@@ -8,4 +8,5 @@ import java.util.List;
 public interface ICommentService extends IGenerateService<Comment>{
     List<Comment> findByAccountId(Long id);
     List<Comment> findByBlogId(Long id);
+    void deleteCommentByIdBlog(Long id_blog);
 }

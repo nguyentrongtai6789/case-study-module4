@@ -20,6 +20,13 @@ public class LikeService implements ILikeService {
     }
 
     @Override
+    public void deleteLikeByIdBlog(Long id_blog) {
+        if (id_blog != null){
+            likeRepository.deleteLikeByIdBlog(id_blog);
+        }
+    }
+
+    @Override
     public List<Like> findALl() {
         return likeRepository.findAll();
     }

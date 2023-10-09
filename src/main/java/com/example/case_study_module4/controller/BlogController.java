@@ -4,9 +4,7 @@ import com.example.case_study_module4.model.Blog;
 import com.example.case_study_module4.model.Category;
 import com.example.case_study_module4.model.account.Account;
 import com.example.case_study_module4.model.account.DTO.AccountDTO;
-import com.example.case_study_module4.service.IAccountService;
-import com.example.case_study_module4.service.IBlogService;
-import com.example.case_study_module4.service.ICategoryService;
+import com.example.case_study_module4.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -29,6 +27,10 @@ public class BlogController {
     IAccountService iAccountService;
     @Autowired
     ICategoryService iCategoryService;
+    @Autowired
+    ICommentService iCommentService;
+    @Autowired
+    ILikeService iLikeService;
 
     @Value("${upload.path}")
     private String upload;
@@ -64,9 +66,13 @@ public class BlogController {
         iBlogService.save(new_Blog);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @GetMapping("/delete/{id_blog}")
+    @PostMapping("/delete/{id_blog}")
     public ResponseEntity<?> delete(@PathVariable("id_blog") Long id_blog){
+
+        iLikeService.deleteLikeByIdBlog(id_blog);
+        iCommentService.deleteCommentByIdBlog(id_blog);
         iBlogService.deleteById(id_blog);
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
     private void getImagePath(Blog blog, MultipartFile file) {
@@ -93,5 +99,15 @@ public class BlogController {
     @GetMapping("/search_by_title/{title}")
     public ResponseEntity<List<Blog>> searchByTitle(@PathVariable("title") String title){
         return new ResponseEntity<>(iBlogService.searchByTitleBlog(title), HttpStatus.OK);
+    }
+    @PostMapping("/create/{id_account}/{id_category}")
+    public ResponseEntity<?> createBlog(@RequestPart("blog") Blog new_Blog,
+                                        @PathVariable("id_account") Long id_account,
+                                        @PathVariable("id_category") Long id_category,
+                                        @RequestPart(value = "file", required = false) MultipartFile file){
+        new_Blog.setCategory(iCategoryService.findById(id_category));
+        new_Blog.setAccount(iAccountService.findOneAccountById(id_account));
+        getImagePath(new_Blog, file);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
