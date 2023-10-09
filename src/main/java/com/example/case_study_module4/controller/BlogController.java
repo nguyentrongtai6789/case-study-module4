@@ -72,7 +72,6 @@ public class BlogController {
         iLikeService.deleteLikeByIdBlog(id_blog);
         iCommentService.deleteCommentByIdBlog(id_blog);
         iBlogService.deleteById(id_blog);
-
         return new ResponseEntity<>(HttpStatus.OK);
     }
     private void getImagePath(Blog blog, MultipartFile file) {

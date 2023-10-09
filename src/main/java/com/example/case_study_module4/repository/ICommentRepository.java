@@ -20,6 +20,7 @@ public interface ICommentRepository extends JpaRepository<Comment, Long> {
     @Query(value = "select * from comment where id_blog = ?1", nativeQuery = true)
     List<Comment> findByBlogId(Long id);
 
+    @Modifying
     @Query(value = "delete from comment where id_blog = ?", nativeQuery = true)
     void deleteByIdBlog(Long id_Blog);
 }
